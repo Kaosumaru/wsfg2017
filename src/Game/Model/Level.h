@@ -102,7 +102,7 @@ namespace BH
         float _startTime = -1;
 
         int _width = 6;
-        int _height = 13;
+        int _height = 9;
         std::vector<Gem::pointer> _gems;
         Selector::pointer _selector = std::make_shared<Selector>();
         std::shared_ptr<ActionList> _rules;

@@ -35,13 +35,17 @@
 		[
 			Table( x1:60 x2:-60 y2:-20 )
 			[
+				tr( h:20 )
 				tr()
 				[
-
+					td()
+					td( w:1024 )[ Drawer.Color() { Color:[1 1 1 1] } ]
+					td()
 				]
+				tr( h:20 )
 				tr( h:750 )
 				[
-					Drawer.Debug.Color() { Color:[1 1 1 1] }
+
 					td()
 					[
 						td()[]
