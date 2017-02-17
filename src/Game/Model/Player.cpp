@@ -10,10 +10,20 @@ void PlayerControlSchema::SetupForPlayer(int number)
 {
     using namespace MX::Game;
     direction.SetFirstTickMultiplier(1.3f);
+
+	{
+		int joy = number == 1 ? 1 : 0;
+		direction.BindJoypad(joy);
+
+		useSkill.bindJoyButton(0, joy, 0);
+		useSkill.bindJoyButton(1, joy, 1);
+		useSkill.bindJoyButton(2, joy, 2);
+	}
+
     if (number == 0)
     {
         direction.bindKeysWSAD();
-
+		
 		useSkill.bindKey(0, SDL_SCANCODE_V);
 		useSkill.bindKey(1, SDL_SCANCODE_B);
 		useSkill.bindKey(2, SDL_SCANCODE_N);
@@ -29,6 +39,7 @@ void PlayerControlSchema::SetupForPlayer(int number)
     else
     {
         direction.bindKeysArrows();
+		direction.BindJoypad(0);
 
         useSkill.bindKey(0, SDL_SCANCODE_Z);
         useSkill.bindKey(1, SDL_SCANCODE_X);
