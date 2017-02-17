@@ -36,8 +36,15 @@ namespace BH
             auto new_current = _current + amount;
             if (new_current > _max)
                 new_current = _max;
+			if (new_current < 0.0f)
+				new_current = 0.0f;
             _current = new_current;
         }
+
+		void Lose(float amount)
+		{
+			Gain(-amount);
+		}
 
         bool Pay(float amount)
         {

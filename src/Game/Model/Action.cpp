@@ -277,6 +277,11 @@ std::shared_ptr<Action> ActionCreator::createSwap()
     return std::make_shared<SwapGemsAction>("Actions.Swap");
 }
 
+std::shared_ptr<Action> ActionCreator::createAttack()
+{
+	return std::make_shared<Action>("Actions.Attack");
+}
+
 std::shared_ptr<Action> ActionCreator::createFireball()
 {
     return std::make_shared<FireballAction>("Actions.Fireball");

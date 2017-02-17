@@ -219,6 +219,7 @@ namespace BH
     struct ActionCreator
     {
         static std::shared_ptr<Action> createSwap();
+		static std::shared_ptr<Action> createAttack();
         static std::shared_ptr<Action> createFireball();
         static std::shared_ptr<Action> createFrostbolt();
         static std::shared_ptr<Action> createGemRain();

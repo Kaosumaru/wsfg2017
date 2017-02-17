@@ -67,8 +67,9 @@ Player::Player(int number)
     });
 
     _actions.Add(ActionCreator::createSwap());
-    _actions.Add(ActionCreator::createFireball());
+    _actions.Add(ActionCreator::createAttack());
 
+#if 0
     if (number < 3)
     {
         _actions.Add(ActionCreator::createFrostbolt());
@@ -80,7 +81,7 @@ Player::Player(int number)
         //_actions.Add(ActionCreator::createGemRain());
 #endif
     }
-    
+#endif 
 
 
     //SwapGems
