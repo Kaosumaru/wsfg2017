@@ -1,7 +1,7 @@
 {
 	Game.Action:
 	{
-		Drawer: Drawer.Composite.Layouter( Size: [64,64] )
+		Drawer: Drawer.Composite.Layouter( Size: [87,87] )
 		[
 			Drawer.Composite.Current()[]
 			Destination( y1:"=Widget.Property('Progress') * 64 " )

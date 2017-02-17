@@ -33,43 +33,46 @@
 			Drawer: &Game.Drawer
 			)
 		[
-			Table( x1:60 x2:-60 )
+			Table( x1:60 x2:-60 y2:-20 )
 			[
-				tr()[]
-				tr( h:768 )
+				tr()
 				[
+
+				]
+				tr( h:750 )
+				[
+					Drawer.Debug.Color() { Color:[1 1 1 1] }
 					td()
 					[
 						td()[]
-						td( w:384 )
-						[
-							Layout( n:Player1.HP p:7 )
-							Layout( n:Player1.Level p:7 )
-						]
-						td( w:20 )
 						td( w:264 )
 						[
 							Layout( n:Player1.Actions )
 						]
+						td( w:20 )
+						td( w:522 )
+						[
+							Layout( n:Player1.HP p:7 )
+							Layout( n:Player1.Level p:3 )
+						]
 						td()[]
 					]
 					td()
 					[
 						td()[]
-						td( w:264 )
+						td( w:522 )
 						[
 							Layout( n:Player2.HP p:7 )
-							Layout( n:Player2.Actions p:9 )
+							Layout( n:Player2.Level p:1 )
 						]
 						td( w:20 )
-						td( w:384 )
+						td( w:264 )
 						[
-							Layout( n:Player2.Level p:7 )
+							Layout( n:Player2.Actions p:9 )
 						]
 						td()[]
 					]
 				]
-				tr()[]
 			]
 			Layout( n:Victory p:5 )
 		]

@@ -3,7 +3,7 @@
 	{
 		Graphic: { Class: Image.Image, Path: selector/Selector.png	}
 
-		Drawer: Drawer.Composite.Layouter( Size: [64,64] )
+		Drawer: Drawer.Composite.Layouter( Size: [87,87] )
 		[
 			Drawer.StretchedImage( Image:&<Selector>.Graphic )
 		]

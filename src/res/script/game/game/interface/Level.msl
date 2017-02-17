@@ -1,7 +1,7 @@
 {
 	Game.Level:
 	{
-		Drawer2: Drawer.Composite.Layouter( Size: [384,768] )
+		Drawer2: Drawer.Composite.Layouter( Size: [522,696] )
 		[
 			Drawer.Color() { Color:[0 0 1 0.3] }
 		]

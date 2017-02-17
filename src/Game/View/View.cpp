@@ -6,6 +6,8 @@ using namespace MX;
 using namespace BH;
 using namespace std;
 
+float gem_size = 87.0f;
+
 class GemView : public MX::Widgets::ScriptLayouterWidget, public MX::SignalTrackable
 {
 public:
@@ -49,7 +51,7 @@ public:
 
 	glm::vec2 positionFromGem(const Gem::pointer& gem)
     {
-        return{ gem->position().x * 64.0f, gem->position().y * 64.0f };
+        return{ gem->position().x * gem_size, gem->position().y * gem_size };
     }
 
     void Run() override
@@ -205,8 +207,8 @@ LevelView::LevelView(const Player::pointer& player, const Level::pointer& level)
         auto target = std::make_shared<MX::ScriptableSpriteActor>();
 
         target->geometry.position = absolute_position();
-        target->geometry.position.x += pos.x * 64.0f + 32.0f;
-        target->geometry.position.y += pos.y * 64.0f + 32.0f;
+        target->geometry.position.x += pos.x * gem_size + gem_size/2.0f;
+        target->geometry.position.y += pos.y * gem_size + gem_size/2.0f;
         target->geometry.position.y -= this->scroll().y;
 
 
@@ -230,7 +232,7 @@ void LevelView::Draw(float x, float y)
 
 void LevelView::Run()
 {
-    int scroll = _level->movementRule()->cooldownTimer().percent() * 64.0f;
+    int scroll = _level->movementRule()->cooldownTimer().percent() * gem_size;
     SetVerticalScroll(scroll);
     MX::Widgets::ScriptLayouterWidget::Run();
 }
@@ -270,5 +272,5 @@ glm::vec2 SelectorView::positionFromSelector()
 {
     int x = _selector->pos().x;
     int y = _selector->pos().y;
-    return { x * 64.0f, y * 64.0f };
+    return { x * gem_size, y * gem_size };
 }
