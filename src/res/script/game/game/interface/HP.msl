@@ -1,0 +1,23 @@
+{
+	Game.View.HP:
+	{
+		Drawer: Drawer.Composite.Layouter( Size: [256, 32] )
+		[
+			Drawer.Color() { Color:[1 1 1 1] }
+
+			Destination( x2:"=Widget.Property('Progress') * &Area.Width " )
+			[
+				Drawer.Color() { Color:[1 1 0 1] }
+			]
+		]
+
+
+		Layouter: Layouter.Drawer(
+			Drawer: &<HP>.Drawer
+			)
+		[
+
+		]
+
+	}
+}

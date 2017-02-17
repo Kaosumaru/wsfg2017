@@ -43,6 +43,8 @@ namespace BH
         Selector::pointer _selector;
     };
     
+
+	std::shared_ptr<MX::Widgets::ScriptLayouterWidget> createHPView(const Player::pointer& player);
 }
 
 

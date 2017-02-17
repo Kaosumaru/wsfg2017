@@ -126,6 +126,39 @@ protected:
     Player::pointer _player;
 };
 
+class HPView : public MX::Widgets::ScriptLayouterWidget
+{
+public:
+	HPView(const Player::pointer& player)
+	{
+		SetLayouter("Game.View.HP.Layouter");
+		_player = player;
+	}
+
+	void Run() override
+	{
+		properties().SetValue("Progress", _player->stats().hp()->percent());
+		MX::Widgets::ScriptLayouterWidget::Run();
+	}
+
+	void Draw(float x, float y) override
+	{
+		auto g2 = Context<Player>::Lock(_player);
+		MX::Widgets::ScriptLayouterWidget::Draw(x, y);
+	}
+
+protected:
+	Player::pointer _player;
+};
+
+namespace BH
+{
+	std::shared_ptr<MX::Widgets::ScriptLayouterWidget> createHPView(const Player::pointer& player)
+	{
+		return std::make_shared<HPView>(player);
+	}
+}
+
 ActionsView::ActionsView(const Player::pointer& player)
 {
     _player = player;

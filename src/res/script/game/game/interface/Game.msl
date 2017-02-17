@@ -43,6 +43,7 @@
 						td()[]
 						td( w:384 )
 						[
+							Layout( n:Player1.HP p:7 )
 							Layout( n:Player1.Level p:7 )
 						]
 						td( w:20 )
@@ -57,6 +58,7 @@
 						td()[]
 						td( w:264 )
 						[
+							Layout( n:Player2.HP p:7 )
 							Layout( n:Player2.Actions p:9 )
 						]
 						td( w:20 )
