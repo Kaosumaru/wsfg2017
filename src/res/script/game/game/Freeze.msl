@@ -1,0 +1,160 @@
+{
+
+  Game.Effects:
+  {
+	Resources:
+	{
+		BasicLight: Image.Image()
+		{
+			Path: "misc/basiclight.png"
+			Pivot: [128,128]
+		}
+		Freeze:
+		{
+			Dots: Image.Image()
+			{
+				Path: "effects/Freeze/Dots.png"
+				Pivot: [64,64]
+			}
+
+			Stripes: Image.Image()
+			{
+				Path: "effects/Freeze/Stripes.png"
+				Pivot: [64,64]
+			}
+		}
+	}
+
+
+
+    Freeze:
+	{
+		Object: Sprite.Scene,
+		Geometry:
+		{
+			Color: [1.0, 1.0, 1.0, 1.0]
+			Scale: [2.0, 2.0]
+			Position: [600,300]
+		}
+		On.Run:
+		[
+			{Object: Command.UnlinkIfEmpty}
+		]
+		Children:
+		[
+			{
+				Object: Particles.SimpleSystem,
+				AdditiveBlending: false,
+				Emitter:
+				{
+					Object: Particles.Emitter.PointRotation,
+					Direction: [0,1]
+					Life: [0.2, 0.4]
+					Speed: [100, 250]
+				}
+				Creator:
+				{
+					Object: Particles.Creator.Image,
+					Start.Color: [0.0, 0.0, 0.0, 0.10]
+					Start.Scale: [0.5, 0.5]
+
+					End.Color: [0.7, 0.9, 1.0, 0.0]
+					End.Scale: [1.2, 1.2]
+
+					Image: &Game.Effects.Resources.BasicLight
+				}
+				Generator:
+				{
+					Object: Particles.Generator.AllAtOnce,
+					ParticleNumber: [35,50]
+				}
+			}
+			{
+				Object: Particles.SimpleSystem,
+				AdditiveBlending: false,
+				Emitter:
+				{
+					Object: Particles.Emitter.PointRotation,
+					Direction: [0,1]
+					Life: [0.3, 0.6]
+					Speed: [30, 70]
+				}
+				Creator:
+				{
+					Object: Particles.Creator.Image,
+					Start.Color: [0.0, 0.0, 0.0, 0.9]
+					Start.Scale: [1.0, 1.0]
+
+					End.Color: [1.0, 1.0, 1.0, 0.0]
+					End.Scale: [2.25, 2.25]
+					AngularVelocity: [-3.0, 3.0]
+
+					Image: &Game.Effects.Resources.Freeze.Dots
+				}
+				Generator:
+				{
+					Object: Particles.Generator.AllAtOnce,
+					ParticleNumber: [4,7]
+				}
+			}
+			{
+				Object: Particles.SimpleSystem,
+				AdditiveBlending: false,
+				Emitter:
+				{
+					Object: Particles.Emitter.PointRotation,
+					Direction: [0,1]
+					Life: [0.2, 0.4]
+					Speed: [10, 20]
+				}
+				Creator:
+				{
+					Object: Particles.Creator.Image,
+					Start.Color: [0.0, 0.0, 0.0, 0.25]
+					Start.Scale: [1.0, 1.0]
+
+					End.Color: [1.0, 1.0, 1.0, 0.0]
+					End.Scale: [1.4, 1.4]
+					AngularVelocity: [-5.0, 5.0]
+
+					Image: &Game.Effects.Resources.Freeze.Stripes
+				}
+				Generator:
+				{
+					Object: Particles.Generator.AllAtOnce,
+					ParticleNumber: [2,4]
+				}
+			}
+			{
+				Object: Particles.SimpleSystem,
+				AdditiveBlending: false,
+				Emitter:
+				{
+					Object: Particles.Emitter.PointRotation,
+					Direction: [0,1]
+					Life: [0.2, 0.4]
+					Speed: [10, 20]
+				}
+				Creator:
+				{
+					Object: Particles.Creator.Image,
+					Start.Color: [0.0, 0.0, 0.0, 0.45]
+					Start.Scale: [1.2, 1.2]
+
+					End.Color: [1.0, 1.0, 1.0, 0.0]
+					End.Scale: [0.75, 0.75]
+					AngularVelocity: [-5.0, 5.0]
+
+					Image: &Game.Effects.Resources.Freeze.Stripes
+				}
+				Generator:
+				{
+					Object: Particles.Generator.AllAtOnce,
+					ParticleNumber: [2,4]
+				}
+			}
+		]
+	}
+
+  }
+}

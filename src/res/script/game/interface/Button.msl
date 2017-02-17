@@ -1,0 +1,33 @@
+{
+	GUI:
+	{
+		Button:
+		{
+			TextDrawer:
+			{
+				Prototype: &GUI.TextDrawer
+				Font.Size: 20
+				Center: true
+			}
+
+			Image: { Class: Image.Slice9Image, Path:"interface/widgets/OptionsButton.png", Margins: [10,10, 10, 10]	}
+
+			Drawer: Drawer.Composite.Layouter( Size: [210,66] )
+			[
+				Drawer.Composite.ButtonState()
+				{
+					Default.Image: &<Button>.Image
+					Normal.Color:[1,1,1,1]
+					Hover.Color:[1,1,1,1.2]
+					Pressed.Color:[1,1,1,0.5]
+				}
+
+				&<Button>.TextDrawer
+			]
+
+		}
+
+
+	}
+
+}

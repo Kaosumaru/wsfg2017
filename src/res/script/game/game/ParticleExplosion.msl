@@ -1,0 +1,196 @@
+{
+
+  Game.Effects:
+  {
+	Resources:
+	{
+		BasicLight: Image.Image()
+		{
+			Path: "misc/basiclight.png"
+			Pivot: [128,128]
+		}
+		Neon:
+		{
+			Stripe: Image.Image()
+			{
+				Path: "effects/NeonExplosion/Stripe.png"
+				Pivot: [11,33]
+			}
+			
+			Square: Image.Image()
+			{
+				Path: "effects/NeonExplosion/Square.png"
+				Pivot: [32,32]
+			}
+			
+			Triangle: Image.Image()
+			{
+				Path: "effects/NeonExplosion/Triangle.png"
+				Pivot: [32,32]
+			}
+			
+			Circle: Image.Image()
+			{
+				Path: "effects/NeonExplosion/Circle.png"
+				Pivot: [32,32]
+			}
+		}
+	}
+
+	
+	
+    NeonExplosion:
+	{
+		Object: Sprite.Scene,
+		Geometry:
+		{
+			Color: [1.0, 1.0, 1.0, 1.0]
+			Scale: [2.0, 2.0]
+			Position: [300,300]
+		}
+		On.Run:
+		[
+			{Object: Command.UnlinkIfEmpty}
+		]
+		Children:
+		[
+			{
+				Object: Particles.SimpleSystem,
+				AdditiveBlending: false,
+				Emitter:
+				{
+					Object: Particles.Emitter.PointRotation,
+					Direction: [0,1]
+					Life: [0.25, 0.325]
+					Speed: [50, 100]
+				}
+				Creator:
+				{
+					Object: Particles.Creator.Image,
+					Start.Color: [0.0, 0.0, 0.0, 0.25]
+					Start.Scale: [1.5, 1.5]
+
+					End.Color: [1.0, 1.0, 1.0, 0.0]
+					End.Scale: [1.1, 1.1]
+
+					Image: &Game.Effects.Resources.BasicLight
+				}
+				Generator:
+				{
+					Object: Particles.Generator.AllAtOnce,
+					ParticleNumber: [4,5]
+				}
+			}
+			{
+				Object: Particles.SimpleSystem,
+				AdditiveBlending: false,
+				Emitter:
+				{
+					Object: Particles.Emitter.PointRotation,
+					Direction: [0,1]
+					Life: [0.25, 0.325]
+					Speed: [150, 400]
+				}
+				Creator:
+				{
+					Object: Particles.Creator.Image,
+					Start.Color: [1.0, 1.0, 1.0, 3.0]
+					Start.Scale: [0.30, 0.40]
+
+					End.Color: [1.0, 1.0, 1.0, 0.0]
+					End.Scale: [0.20, 0.30]
+
+					Image: &Game.Effects.Resources.Neon.Stripe
+				}
+				Generator:
+				{
+					Object: Particles.Generator.AllAtOnce,
+					ParticleNumber: [5,8]
+				}
+			}
+			{
+				Object: Particles.SimpleSystem,
+				AdditiveBlending: false,
+				Emitter:
+				{
+					Object: Particles.Emitter.PointRotation,
+					Direction: [0,1]
+					Life: [0.15, 0.27]
+					Speed: [150, 400]
+				}
+				Creator:
+				{
+					Object: Particles.Creator.Image,
+					Start.Color: [1.0, 1.0, 1.0, 3.0]
+					Start.Scale: [0.40, 0.40]
+
+					End.Color: [1.0, 1.0, 1.0, 0.0]
+					End.Scale: [0.2, 0.2]
+
+					Image: &Game.Effects.Resources.Neon.Square
+				}
+				Generator:
+				{
+					Object: Particles.Generator.AllAtOnce,
+					ParticleNumber: [-1,3]
+				}
+			}
+			{
+				Object: Particles.SimpleSystem,
+				AdditiveBlending: false,
+				Emitter:
+				{
+					Object: Particles.Emitter.PointRotation,
+					Direction: [0,1]
+					Life: [0.15, 0.27]
+					Speed: [150, 400]
+				}
+				Creator:
+				{
+					Object: Particles.Creator.Image,
+					Start.Color: [1.0, 1.0, 1.0, 3.0]
+					Start.Scale: [0.40, 0.40]
+
+					End.Color: [1.0, 1.0, 1.0, 0.0]
+					End.Scale: [0.2, 0.2]
+
+					Image: &Game.Effects.Resources.Neon.Circle
+				}
+				Generator:
+				{
+					Object: Particles.Generator.AllAtOnce,
+					ParticleNumber: [-1,3]
+				}
+			}
+			{
+				Object: Particles.SimpleSystem,
+				AdditiveBlending: false,
+				Emitter:
+				{
+					Object: Particles.Emitter.PointRotation,
+					Direction: [0,1]
+					Life: [0.15, 0.27]
+					Speed: [150, 400]
+				}
+				Creator:
+				{
+					Object: Particles.Creator.Image,
+					Start.Color: [1.0, 1.0, 1.0, 3.0]
+					Start.Scale: [0.40, 0.40]
+
+					End.Color: [1.0, 1.0, 1.0, 0.0]
+					End.Scale: [0.2, 0.2]
+
+					Image: &Game.Effects.Resources.Neon.Triangle
+				}
+				Generator:
+				{
+					Object: Particles.Generator.AllAtOnce,
+					ParticleNumber: [-1,3]
+				}
+			}
+		]
+	}
+
+  }
+}

@@ -1,0 +1,109 @@
+{
+	GUI.MainMenu:
+	{
+		ShaderDrawer: Drawer.Color.Shader()
+		{
+			Shader: Shader.Uniform.Timed()
+			{
+				VertexPath: Shaders/instanced.vertex
+				FragmentPath: Shaders/menu/star.fragment
+
+				Name: StarShader
+
+				Defines:
+				[
+				]
+
+				Debug: true
+				Debug.Uniforms:
+				[
+					GL.Uniform.Float( n:time_m v:1 step:0.01)
+				]
+			}
+
+			Uniforms:
+			[
+				GL.Uniform.Int( n:iChannel0 v:1 )
+				GL.Uniform.Int( n:iChannel1 v:2 )
+				GL.Uniform.Int( n:iChannel2 v:3 )
+			]
+
+			Samplers:
+			[
+				Image.Image( Path: "ShaderData/tex02.jpg", Mipmap: true, Wrap: true )
+				Image.Image( Path: "ShaderData/tex09.jpg", Mipmap: true, Wrap: true )
+				Image.Image( Path: "ShaderData/tex3.jpg", Mipmap: true, Wrap: true )
+			]
+		}
+
+		ShaderDrawer2: Drawer.Color.Shader()
+		{
+			Shader: Shader.Uniform.Timed()
+			{
+				VertexPath: Shaders/instanced.vertex
+				FragmentPath: Shaders/menu/menu.fragment
+
+				Name: BackShader
+
+				Defines:
+				[
+				]
+
+				Debug: true
+				Debug.Uniforms:
+				[
+					GL.Uniform.Float( n:time_m v:1 step:0.01)
+				]
+			}
+		}
+
+		Image.Puzzle: { Class: Image.Image, Path: menu/Puzzle.png	}
+		Image.Madness: { Class: Image.Image, Path: menu/Madness.png	}
+
+		Drawer: Drawer.Composite.Layouter()
+		[
+			/*&<MainMenu>.ShaderDrawer2*/
+			Drawer.Composite.Blender( Blender:{ Op:Add Src:Alpha Dest:One } )
+			[
+				Table()
+				[
+					td()[]
+					td( w:1024 )
+					[
+						Shift( Position:[-50 0] )
+						[
+							//Drawer.Color() { Color:[1 0 0 1] }
+							Destination( x1: 130 y1: 120)
+							[
+								Drawer.Image() { Image: &<MainMenu>.Image.Madness }
+							]
+
+							Drawer.Image() { p:1 Image: &<MainMenu>.Image.Puzzle }
+
+						]
+
+					]
+					td()[]
+				]
+			]
+		]
+
+
+		Layouter: Layouter.Drawer(
+			Drawer: &<MainMenu>.Drawer
+			Drawers: [ [&GUI.Button.Drawer [Button.Game Button.Game2 Button.Exit]] ]
+			)
+		[
+			Table( y2:-100 )
+			[
+				Layout( n:Button.Game p:1 )
+				Layout( n:Button.Game2 p:2 )
+				Layout( n:Button.Exit p:3 )
+			]
+		]
+
+
+
+	}
+
+}

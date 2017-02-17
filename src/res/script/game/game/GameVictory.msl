@@ -1,0 +1,23 @@
+{
+	Game.Victory.Screen:
+	{
+
+		Player1.Drawer: Drawer.Composite.Layouter( Size: [450,225] )
+		[
+			Drawer.Image() [ { Class: Image.Image, Path: interface/PlayerOneWon.png	} ]
+		]
+
+		Player2.Drawer: Drawer.Composite.Layouter( Size: [450,225] )
+		[
+			Drawer.Color() [ { Class: Image.Image, Path: interface/PlayerTwoWon.png	} ]
+		]
+
+		Tie.Drawer: Drawer.Composite.Layouter( Size: [450,225] )
+		[
+			Drawer.Color() { Color:[1 1 1 1] }
+		]
+
+
+
+	}
+}

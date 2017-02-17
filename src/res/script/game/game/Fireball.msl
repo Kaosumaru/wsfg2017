@@ -1,0 +1,193 @@
+{
+
+  Game.Effects:
+  {
+	Resources:
+	{
+		BasicLight: Image.Image()
+		{
+			Path: "misc/basiclight.png"
+			Pivot: [128,128]
+		}
+		Fireball:
+		{
+			Smoke: Image.Image()
+			{
+				Path: "effects/Fireball/Smoke.png"
+				Pivot: [64,64]
+			}
+			Wave: Image.Image()
+			{
+				Path: "effects/Fireball/Wave.png"
+				Pivot: [64,32]
+			}
+		}
+	}
+
+
+    Fireball:
+	{
+		Object: Sprite.Scene
+		Geometry:
+		{
+			Color: [1.0, 1.0, 1.0, 1.0]
+			Scale: [2.0, 2.0]
+			Position: [300,300]
+		}
+		On.Run:
+		[
+			{Object: Command.UnlinkIfEmpty}
+		]
+		Children:
+		[
+			{
+				Object: Particles.SimpleSystem,
+				AdditiveBlending: false,
+				Emitter:
+				{
+					Object: Particles.Emitter.PointRotation,
+					Direction: [0,1]
+					Life: [0.25, 0.325]
+					Speed: [50, 100]
+				}
+				Creator:
+				{
+					Object: Particles.Creator.Image,
+					Start.Color: [0.0, 0.0, 0.0, 0.5]
+					Start.Scale: [0.7, 0.7]
+
+					End.Color: [1.0, 0.9, 0.8, 0.0]
+					End.Scale: [1.4, 1.4]
+
+					Image: &Game.Effects.Resources.BasicLight
+				}
+				Generator:
+				{
+					Object: Particles.Generator.AllAtOnce,
+					ParticleNumber: [4,5]
+				}
+			}
+			{
+				Object: Particles.SimpleSystem,
+				AdditiveBlending: false,
+				Emitter:
+				{
+					Object: Particles.Emitter.PointRotation,
+					Direction: [0,1]
+					Life: [0.2, 0.3]
+					Speed: [10, 50]
+				}
+				Creator:
+				{
+					Object: Particles.Creator.Image,
+					Start.Color: [0.0, 0.0, 0.0, 0.75]
+					Start.Scale: [0.5, 0.5]
+
+					End.Color: [1.0, 1.0, 1.0, 0.0]
+					End.Scale: [1.5, 1.5]
+
+					AngularVelocity: [-2.0, 2.0]
+
+					Image: &Game.Effects.Resources.Fireball.Smoke
+				}
+				Generator:
+				{
+					Object: Particles.Generator.AllAtOnce,
+					ParticleNumber: [5,10]
+				}
+			}
+
+
+
+			{
+				Object: Particles.SimpleSystem,
+				AdditiveBlending: false,
+				Emitter:
+				{
+					Object: Particles.Emitter.PointRotation,
+					Direction: [0,1]
+					Life: [0.15, 0.2]
+					Speed: [225, 300]
+				}
+				Creator:
+				{
+					Object: Particles.Creator.Image,
+					Start.Color: [0.0, 0.0, 0.0, 1.0]
+					Start.Scale: [0.9, 0.9]
+
+					End.Color: [0.9, 0.4, 0.1, 0.0]
+					End.Scale: [1.2, 1.2]
+
+					AngularVelocity: [-1, 1]
+
+					Image: &Game.Effects.Resources.Fireball.Wave
+				}
+				Generator:
+				{
+					Object: Particles.Generator.AllAtOnce,
+					ParticleNumber: [25,30]
+				}
+			}
+			{
+				Object: Particles.SimpleSystem,
+				AdditiveBlending: false,
+				Emitter:
+				{
+					Object: Particles.Emitter.PointRotation,
+					Direction: [0,1]
+					Life: [0.15, 0.2]
+					Speed: [200, 275]
+				}
+				Creator:
+				{
+					Object: Particles.Creator.Image,
+					Start.Color: [0.0, 0.0, 0.0, 1.0]
+					Start.Scale: [0.9, 0.9]
+
+					End.Color: [1.0, 0.8, 0.0, 0.0]
+					End.Scale: [1.2, 1.2]
+
+					AngularVelocity: [-1, 1]
+
+					Image: &Game.Effects.Resources.Fireball.Wave
+				}
+				Generator:
+				{
+					Object: Particles.Generator.AllAtOnce,
+					ParticleNumber: [25,30]
+				}
+			}
+			{
+				Object: Particles.SimpleSystem,
+				AdditiveBlending: false,
+				Emitter:
+				{
+					Object: Particles.Emitter.PointRotation,
+					Direction: [0,1]
+					Life: [0.15, 0.2]
+					Speed: [50, 250]
+				}
+				Creator:
+				{
+					Object: Particles.Creator.Image,
+					Start.Color: [0.0, 0.0, 0.0, 1.0]
+					Start.Scale: [0.9, 0.9]
+
+					End.Color: [1.0, 1.0, 1.0, 0.0]
+					End.Scale: [1.2, 1.2]
+
+					AngularVelocity: [-1, 1]
+
+					Image: &Game.Effects.Resources.Fireball.Wave
+				}
+				Generator:
+				{
+					Object: Particles.Generator.AllAtOnce,
+					ParticleNumber: [25,30]
+				}
+			}
+		]
+	}
+
+  }
+}

@@ -1,0 +1,53 @@
+{
+	Game.Level:
+	{
+		Drawer2: Drawer.Composite.Layouter( Size: [384,768] )
+		[
+			Drawer.Color() { Color:[0 0 1 0.3] }
+		]
+
+
+		BlueFrame.Image: { Class: Image.Slice9Image, Path:"interface/BlueFrame.png", Margins: [20,20, 20, 20]	}
+		RedFrame.Image: { Class: Image.Slice9Image, Path:"interface/RedFrame.png", Margins: [20,20, 20, 20]	}
+
+		Frame.Drawer: Drawer.Composite.Layouter()
+		[
+			Drawer.Composite.Blender( Blender:{ Op:Add Src:Alpha Dest:InverseAlpha } )
+			[
+				Drawer.Composite.Switch(
+						Condition:"=&Player.Number"
+						Default: Drawer.QuadImage()[ &<Level>.BlueFrame.Image ]
+					)
+				[
+					[1 Drawer.QuadImage()[ &<Level>.RedFrame.Image ] ]
+				]
+			]
+		]
+
+		Drawer:  Drawer.Proxy.Surface()
+		{
+			Drawer: &<Level>.Drawer2
+			InhibitNormalDrawing: true
+
+			PostDrawer:Drawer.Composite.Layouter()
+			[
+				Drawer.Image()
+
+				Shift( Margin:10 )
+				[
+					&<Level>.Frame.Drawer
+				]
+
+			]
+		}
+
+
+		Layouter: Layouter.Drawer(
+			Drawer: &<Level>.Drawer
+			)
+		[
+
+		]
+
+	}
+}

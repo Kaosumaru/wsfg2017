@@ -1,0 +1,16 @@
+{
+	Game.Actions:
+	{
+		Drawer: Drawer.Composite.Layouter( Size: [64,768] )
+		[
+			//Drawer.Color() { Color:[0.3 0.3 0.3 1] }
+		]
+
+
+		Layouter:   Layouter.Vertical(
+			Spacing: 12
+			Drawer: &<Actions>.Drawer
+		)
+
+	}
+}

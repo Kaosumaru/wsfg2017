@@ -1,0 +1,76 @@
+{
+	Game:
+	{
+		ShaderDrawer: Drawer.Color.Shader()
+		{
+			Shader: Shader.Uniform.Timed()
+			{
+				VertexPath: Shaders/instanced.vertex
+				FragmentPath: Shaders/menu/background.fragment
+
+				Name: BackShader
+
+				Defines:
+				[
+				]
+
+				Debug: true
+				Debug.Uniforms:
+				[
+					GL.Uniform.Float( n:time_m v:1 step:0.01)
+				]
+			}
+		}
+
+		Drawer: Drawer.Composite.Layouter()
+		[
+			//&<Game>.ShaderDrawer
+			Drawer.Color() { Color:[1 0 1 0.3] }
+		]
+
+
+		Layouter: Layouter.Drawer(
+			Drawer: &Game.Drawer
+			)
+		[
+			Table( x1:60 x2:-60 )
+			[
+				tr()[]
+				tr( h:768 )
+				[
+					td()
+					[
+						td()[]
+						td( w:384 )
+						[
+							Layout( n:Player1.Level p:7 )
+						]
+						td( w:20 )
+						td( w:264 )
+						[
+							Layout( n:Player1.Actions )
+						]
+						td()[]
+					]
+					td()
+					[
+						td()[]
+						td( w:264 )
+						[
+							Layout( n:Player2.Actions p:9 )
+						]
+						td( w:20 )
+						td( w:384 )
+						[
+							Layout( n:Player2.Level p:7 )
+						]
+						td()[]
+					]
+				]
+				tr()[]
+			]
+			Layout( n:Victory p:5 )
+		]
+
+	}
+}

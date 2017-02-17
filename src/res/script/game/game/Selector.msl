@@ -1,0 +1,19 @@
+{
+	Game.Selector:
+	{
+		Graphic: { Class: Image.Image, Path: selector/Selector.png	}
+
+		Drawer: Drawer.Composite.Layouter( Size: [64,64] )
+		[
+			Drawer.StretchedImage( Image:&<Selector>.Graphic )
+		]
+
+		Layouter: Layouter.Drawer(
+			Drawer: &<Selector>.Drawer
+			)
+		[
+
+		]
+
+	}
+}

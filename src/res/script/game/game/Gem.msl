@@ -1,0 +1,76 @@
+{
+	Game.Gem:
+	{
+		Graphic:
+		[
+			{ Class: Image.Image, Path: gems/0.png	}
+			{ Class: Image.Image, Path: gems/1.png	}
+			{ Class: Image.Image, Path: gems/2.png	}
+			{ Class: Image.Image, Path: gems/3.png	}
+			{ Class: Image.Image, Path: gems/4.png	}
+		]
+
+		GraphicGlowing:
+		[
+			{ Class: Image.Image, Path: gems/0markglowing.png	}
+			{ Class: Image.Image, Path: gems/1markglowing.png	}
+			{ Class: Image.Image, Path: gems/2markglowing.png	}
+			{ Class: Image.Image, Path: gems/3markglowing.png	}
+			{ Class: Image.Image, Path: gems/4markglowing.png	}
+		]
+
+		BGDrawer: Drawer.StretchedImage( Image:&<Gem>.Graphic.0 )
+		{
+			//Color: [1 1 1 "=if(&Gem.ExplosionPercent > 0.75, (1 - (&Gem.ExplosionPercent - 0.75))*4, 1 )"]
+			Color: [1 1 1 "=1 - if(&Gem.ExplosionPercent > 0.75, (&Gem.ExplosionPercent - 0.75) * 4, 0)"]
+		}
+
+		GlowingDrawer: Drawer.StretchedImage( Image:&<Gem>.Graphic.0 )
+		{
+			Color: [1 1 1 "=&Gem.ExplosionPercent"]
+		}
+
+		Frost: { Class: Image.Image, Path: effects/freeze.png	}
+
+		Drawer: Drawer.Composite.Layouter( Size: [64,64] )
+		[
+			//Drawer.Color() { Color:[1 0 0 "=&Gem.ExplosionPercent"] }
+
+			Drawer.Composite.Switch(
+					Condition:"=Widget.Property('GemType')"
+				)
+			[
+				[0 { Prototype:&<Gem>.BGDrawer Image:&<Gem>.Graphic.0 } ]
+				[1 { Prototype:&<Gem>.BGDrawer Image:&<Gem>.Graphic.1 } ]
+				[2 { Prototype:&<Gem>.BGDrawer Image:&<Gem>.Graphic.2 } ]
+				[3 { Prototype:&<Gem>.BGDrawer Image:&<Gem>.Graphic.3 } ]
+				[4 { Prototype:&<Gem>.BGDrawer Image:&<Gem>.Graphic.4 } ]
+			]
+
+			Drawer.Composite.Switch(
+			Condition:"=Widget.Property('GemType')"
+				)
+			[
+				[0 { Prototype:&<Gem>.GlowingDrawer Image:&<Gem>.GraphicGlowing.0 } ]
+				[1 { Prototype:&<Gem>.GlowingDrawer Image:&<Gem>.GraphicGlowing.1 } ]
+				[2 { Prototype:&<Gem>.GlowingDrawer Image:&<Gem>.GraphicGlowing.2 } ]
+				[3 { Prototype:&<Gem>.GlowingDrawer Image:&<Gem>.GraphicGlowing.3 } ]
+				[4 { Prototype:&<Gem>.GlowingDrawer Image:&<Gem>.GraphicGlowing.4 } ]
+			]
+
+			Drawer.Composite.If( Condition:"=Widget.Property('Frozen') == 1" )
+			[
+				Drawer.Image( Image:&<Gem>.Frost p:5 )
+			]
+		]
+
+
+		Layouter: Layouter.Drawer(
+			Drawer: &<Gem>.Drawer
+			)
+		[
+
+		]
+
+	}
+}

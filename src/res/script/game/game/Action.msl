@@ -1,0 +1,27 @@
+{
+	Game.Action:
+	{
+		Drawer: Drawer.Composite.Layouter( Size: [64,64] )
+		[
+			Drawer.Composite.Current()[]
+			Destination( y1:"=Widget.Property('Progress') * 64 " )
+			[
+				Drawer.Color() { Color:[0 0 0 0.3] }
+			]
+
+			Shift( Margin:5 )
+			[
+				&Game.Level.Frame.Drawer
+			]
+		]
+
+
+		Layouter: Layouter.Drawer(
+			Drawer: &<Action>.Drawer
+			)
+		[
+
+		]
+
+	}
+}
