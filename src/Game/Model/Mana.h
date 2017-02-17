@@ -17,6 +17,17 @@ namespace BH
             _max = max;
         }
 
+		Mana(float current, float max)
+		{
+			_current = current;
+			_max = max;
+		}
+
+		float percent()
+		{
+			return _current.directValueAccess() / _max.directValueAccess();
+		}
+
         SignalizingVariable<float> _current = 0.0f;
         SignalizingVariable<float> _max;
 
@@ -52,7 +63,7 @@ namespace BH
             for (int i = 0; i < 5; i++)
                 _manas.push_back(std::make_shared<Mana>());
 
-			_hp = std::make_shared<Mana>(100.0f);
+			_hp = std::make_shared<Mana>(100.0f, 100.0f);
         }
 
         auto &manas() { return _manas; }
