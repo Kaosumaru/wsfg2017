@@ -4,7 +4,7 @@
 #include "utils/Utils.h"
 #include "action.h"
 #include "utils/SignalizingVariable.h"
-
+#include "Game/Model/PLayer.h"
 namespace BH
 {
     class Rule : public Action
@@ -177,6 +177,7 @@ namespace BH
 			auto &player = Context<Player>::current();
 			if (player.stats().hp()->_current <= 0.0f)
 				reportPlayerLost();
+			return true;
 		}
 	};
 
