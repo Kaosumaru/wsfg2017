@@ -3,6 +3,7 @@
 #include "Game.h"
 #include "Player.h"
 #include "widgets/Drawers/Drawer.h"
+#include "script/ScriptClassParser.h"
 
 using namespace BH;
 
@@ -103,6 +104,9 @@ glm::ivec2 Action::wantsDelta()
     auto &player = Context<Player>::current();
     return player.schema().direction.target;
 }
+
+MXREGISTER_CLASS_DEFAULT(L"Game.Action", Action)
+MXREGISTER_CLASS_DEFAULT(L"Game.Action.Swap", SwapGemsAction)
 
 bool ActionList::UseAction(int index)
 {

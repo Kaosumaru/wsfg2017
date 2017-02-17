@@ -3,7 +3,7 @@
 	{
 		Flashing: "= 1 + if( &Action.CanPay, math.abs( math.sin( time.now()*6 ) ) * 0.5, 0 )"
 
-		Attack:
+		Attack: Game.Action()
 		{
 			Cooldown: 0.5
 			ManaCost: 3

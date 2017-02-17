@@ -66,8 +66,13 @@ Player::Player(int number)
             _level->selector()->Move(v);
     });
 
-    _actions.Add(ActionCreator::createSwap());
-    _actions.Add(ActionCreator::createAttack());
+	MX::ScriptObjectString script("Game.Player");
+
+	std::vector<Action::pointer> actions;
+	script.load_property(actions, "Actions");
+
+	for (auto &action : actions)
+		_actions.Add(action);
 
 #if 0
     if (number < 3)

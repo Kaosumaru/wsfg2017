@@ -1,0 +1,16 @@
+{
+	Actions:
+	{
+		Swap: Game.Action.Swap()
+		{
+			Cooldown: 0.2
+			Events:
+			[
+				Event.PlaySound()
+				[
+					Sound.Sample()[ "sounds/swap.ogg" ]
+				]
+			]
+		}
+	}
+}

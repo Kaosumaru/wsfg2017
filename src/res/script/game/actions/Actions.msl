@@ -1,18 +1,6 @@
 {
 	Actions:
 	{
-		Swap:
-		{
-			Cooldown: 0.2
-			Events:
-			[
-				Event.PlaySound()
-				[
-					Sound.Sample()[ "sounds/swap.ogg" ]
-				]
-			]
-		}
-
 		Flashing: "= 1 + if( &Action.CanPay, math.abs( math.sin( time.now()*6 ) ) * 0.5, 0 )"
 
 		Fireball:

@@ -1,0 +1,10 @@
+{
+	Game.Player:
+	{
+		Actions:
+		[
+			&Actions.Swap
+			&Actions.Attack
+		]
+	}
+}
