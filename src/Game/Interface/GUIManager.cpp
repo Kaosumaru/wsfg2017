@@ -84,7 +84,7 @@ GuiManager::GuiManager()
 
 	GameInitializer::Init();
 #ifndef MX_GAME_RELEASE
-    menu->OnGame(1, false);
+    menu->OnGame(2, false);
 #endif
 }
 
