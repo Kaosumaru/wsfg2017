@@ -19,7 +19,6 @@
 		{
 			Cooldown: 0.5
 			ManaCost: 7
-			Passive: true
 			ManaSource: 2
 			Drawer:	Drawer.Composite.Switch(
 					Condition:"=&Player.Number"
