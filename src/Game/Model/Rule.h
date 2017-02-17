@@ -164,6 +164,21 @@ namespace BH
         MX::EventHolder   _matchEvents;
     };
 
+	class DeathRule : public Rule
+	{
+	public:
+		DeathRule() : Rule("Rule.Death")
+		{
+			
+		}
+
+		bool onDo() override
+		{
+			auto &player = Context<Player>::current();
+			if (player.stats().hp()->_current <= 0.0f)
+				reportPlayerLost();
+		}
+	};
 
     class LevelMovement : public Rule
     {

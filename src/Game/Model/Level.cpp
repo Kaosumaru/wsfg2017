@@ -46,6 +46,8 @@ Level::Level()
     _rules = std::make_shared<ActionList>();
     _rules->Add(std::make_shared<GravityRule>());
     _rules->Add(std::make_shared<Match3Rule>());
+	_rules->Add(std::make_shared<DeathRule>());
+	
 
     _movementRule = std::make_shared<LevelMovement>();
     _rules->Add(_movementRule);

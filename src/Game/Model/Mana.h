@@ -51,12 +51,16 @@ namespace BH
         {
             for (int i = 0; i < 5; i++)
                 _manas.push_back(std::make_shared<Mana>());
+
+			_hp = std::make_shared<Mana>(100.0f);
         }
 
         auto &manas() { return _manas; }
+		auto &hp() { return _hp; }
        
     protected:
         std::vector<Mana::pointer> _manas;
+		Mana::pointer _hp;
     };
 }
 
