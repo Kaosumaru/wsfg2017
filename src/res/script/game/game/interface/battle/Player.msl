@@ -3,7 +3,7 @@
 	{
 		Drawer: Drawer.Composite.Layouter()
 		[
-			Drawer.Color() { Color:[1 0 0 0.5] }
+			//Drawer.Color() { Color:[1 0 0 0.5] }
 		]
 
 
@@ -11,8 +11,7 @@
 			Drawer: &<View>.Drawer
 			)
 		[
-			Layout( n:Player1 )
-			Layout( n:Player2 )
+
 
 		]
 

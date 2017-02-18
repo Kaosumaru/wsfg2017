@@ -2,15 +2,19 @@
 	Game.Selector:
 	{
 		Graphic: { Class: Image.Image, Path: selector/Selector.png	}
+		Graphic1: { Class: Image.Image, Path: selector/runaznacznikoff.png }
+		Graphic2: { Class: Image.Image, Path: selector/runaznacznik.png }
+
 
 		Drawer: Drawer.Composite.Layouter( Size: [87,87] )
 		[
-			Drawer.StretchedImage( Image:&<Selector>.Graphic )
 
-			Drawer.Composite.If( Condition:"=Widget.Property('Hold') == 1" )
-			[
-				Drawer.StretchedImage( Image:&<Selector>.Graphic Color:[1 0 0 1] )
-			]
+				Drawer.Composite.If( Condition:"=Widget.Property('Hold') == 1" Else:[Drawer.Image( Image:&<Selector>.Graphic1 Pos:5 )])
+				[
+					Drawer.Image( Image:&<Selector>.Graphic2 Pos:5 )
+				]
+
+
 		]
 
 		Layouter: Layouter.Drawer(

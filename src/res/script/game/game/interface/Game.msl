@@ -8,7 +8,17 @@
 			//&<Game>.ShaderDrawer
 			Drawer.Color() { Color:[1 0 1 0.3] }
 			Drawer.Image()[ Image.Image()["game/background.png"] ]
+			Drawer.Image()[ Image.Image()["game/trees-back.png"] ]
+
+			Destination( y1:210)
+			[
+				Drawer.Image()[ Image.Image()["game/ground.png"] ]
+			]
+
+			Drawer.Image()[ Image.Image()["game/grass.png"] ]
 			Drawer.Image()[ Image.Image()["game/particle.png"] ]
+			Drawer.Image()[ Image.Image()["game/top.png"] ]
+			Drawer.Image()[ Image.Image()["game/gradient_sky.png"] ]
 		]
 
 
