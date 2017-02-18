@@ -54,6 +54,8 @@ namespace BH
         Level::pointer _level = std::make_shared<Level>();
         ActionList _actions;
         PlayerControlSchema _controlSchema;
+		MX::Time::SimpleTimer _timer;
+		MX::FunctorsQueue _queue;
     };
 }
 

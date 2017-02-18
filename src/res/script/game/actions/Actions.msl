@@ -7,6 +7,8 @@
 			ManaCost: 3
 			Passive: true
 			ManaSource: 1
+
+
 			Drawer:	Drawer.Composite.Switch(
 					Condition:"=&Player.Number"
 					Default: Drawer.Image( Color:[&<Actions>.Flashing &<Actions>.Flashing &<Actions>.Flashing "=0.5 + &Action.CanPay * 0.5"] )[ { Class: Image.Image, Path: interface/ExplosionIconBlue.png	} ]
@@ -32,6 +34,24 @@
 			ManaCost: 4
 			ManaSource: 3
 			Passive: true
-		}		
+		}
+
+		SlowTime: Game.Action()
+		{
+			Cooldown: 2
+			ManaCost: 4
+			ManaSource: 4
+			Passive: true
+
+			Events:
+			[
+				Event.ChangeTimeMultiplier()[-0.5]
+				Event.CompositeDelay( Time:3 )
+				[
+					Event.ChangeTimeMultiplier()[0.5]
+				]
+			]
+		}
+
 	}
 }

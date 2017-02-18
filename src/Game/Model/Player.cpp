@@ -108,8 +108,11 @@ void Player::Update()
     if (_lost)
         return;
 
+	auto guard2 = Context<MX::FunctorsQueue>::Lock(_queue);
+	auto guard = Context<MX::Time::Timer>::Lock(_timer);
     auto g1 = Context<Player>::Lock(this);
     auto g12 = Context<Level>::Lock(_level);
+	_queue.Run();
     _actions.Update();
 
     _controlSchema.Run();
@@ -119,4 +122,5 @@ void Player::Update()
     _controller->Update();
     */
     _level->Update();
+	_timer.Step();
 }

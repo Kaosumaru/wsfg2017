@@ -10,6 +10,7 @@
 			&Actions.Heal
 			&Actions.GemRain
 			&Actions.Frostbolt
+			&Actions.SlowTime
 		]
 	}
 }

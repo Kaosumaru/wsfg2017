@@ -80,3 +80,20 @@ protected:
 	float _amount = 5.0f;
 };
 MXREGISTER_CLASS(L"Event.Heal", HealEvent)
+
+class ChangeTimeMultiplierEvent : public CommonEvent
+{
+public:
+	ChangeTimeMultiplierEvent(MX::LScriptObject& script) : CommonEvent(script)
+	{
+		script.load_property_child( _amount, "Amount" );
+	}
+
+	void Do() override
+	{
+		player()._speedMultiplier += _amount;
+	}
+protected:
+	float _amount = 0.1f;
+};
+MXREGISTER_CLASS(L"Event.ChangeTimeMultiplier", ChangeTimeMultiplierEvent)

@@ -198,8 +198,8 @@ public:
 
         enumerateEnemyBlocks3x3(pos, [](auto &level, auto& pos, auto &gem)
         {
-            if (gem)
-                gem->_frozen = true;
+			if (gem)
+				gem->Freeze();
         });
     }
 
@@ -213,7 +213,7 @@ public:
         return points;
     }
 };
-
+MXREGISTER_CLASS_DEFAULT(L"Game.Action.Frostbolt", FrostboltAction)
 
 class GemRainAction : public Action
 {

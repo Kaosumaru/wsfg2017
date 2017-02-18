@@ -17,3 +17,10 @@ Gem::pointer Gem::random()
     int randomType = Random::randomInt(0, maxType-1);
     return std::make_shared<Gem>(randomType);
 }
+
+void Gem::Freeze()
+{
+	if (!_frozen)
+		MX::FunctorsQueue::current().planWeakFunctor(7.0f, [&]() { _frozen = false; }, shared_from_this());
+	_frozen = true;
+}

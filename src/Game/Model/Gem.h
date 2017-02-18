@@ -7,7 +7,7 @@
 #include <cmath>
 namespace BH
 {
-    class Gem
+    class Gem : std::enable_shared_from_this<Gem>
     {
     public:
         friend class Level;
@@ -31,6 +31,8 @@ namespace BH
         SignalizingVariable<bool> _frozen = false;
         SignalizingVariable<float> _exploding = 0.0f;
         bool _wantToExplode = false;
+
+		void Freeze();
 
         bool canBeMovedByAnything()
         {
