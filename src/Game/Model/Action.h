@@ -181,31 +181,13 @@ namespace BH
             if (direction == glm::ivec2{ 0,0 })
                 return false;
 
-
-            auto gem1 = level().at(pos1);
-            auto gem2 = level().at(pos2);
-
-            if (gem1 && !gem1->canBeMovedByPlayer())
-                return false;
-            if (gem2 && !gem2->canBeMovedByPlayer())
-                return false;
-
-            //dont allow to swap up/down with empty spaces
-            {
-                if (/*direction == Selector::Direction::Up ||*/ direction == glm::ivec2{ 0,1 })
-                {
-                    if (!gem1 || !gem2)
-                        return false;
-                }
-            }
-
-
-            level().SwapGems(pos1, pos2);
-
-            _lastDirection = direction;
-            _lastPosition = pos1;
-
-            return true;
+			if (level().SwapGemsByPlayer(pos1, pos2))
+			{
+				_lastDirection = direction;
+				_lastPosition = pos1;
+				return true;
+			}
+            return false;
         }
 
         glm::ivec2 _lastPosition = { -1,-1 };

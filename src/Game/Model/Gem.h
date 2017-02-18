@@ -29,6 +29,7 @@ namespace BH
 
         SignalizingVariable<bool> _falling = false;
         SignalizingVariable<bool> _frozen = false;
+		SignalizingVariable<bool> _held = false;
         SignalizingVariable<float> _exploding = 0.0f;
         bool _wantToExplode = false;
 

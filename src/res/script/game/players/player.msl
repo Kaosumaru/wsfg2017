@@ -5,6 +5,7 @@
 		HorizSelector: false
 		Actions:
 		[
+			&Actions.Hold
 			Game.Action.Speed()[2.5]
 			&Actions.Attack
 			&Actions.Heal

@@ -48,6 +48,9 @@ namespace BH
 
 		float _speedMultiplier = 1.0f;
 		bool _horizSelector = false;
+
+		bool isHoldingGem() { return _heldGem != nullptr; }
+		bool HoldGem(const Gem::pointer& gem);
     protected:
         int                 _number = 0;
         Stats               _stats;
@@ -57,6 +60,7 @@ namespace BH
         PlayerControlSchema _controlSchema;
 		MX::Time::SimpleTimer _timer;
 		MX::FunctorsQueue _queue;
+		Gem::pointer _heldGem;
     };
 }
 

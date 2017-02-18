@@ -55,6 +55,7 @@ namespace BH
 
         bool InsertGem(const glm::ivec2& pos, const Gem::pointer& gem);
         bool SwapGems(const glm::ivec2& pos1, const glm::ivec2& pos2);
+		bool SwapGemsByPlayer(const glm::ivec2& pos1, const glm::ivec2& pos2);
         void DestroyGem(const glm::ivec2& pos);
 
         void RandomizeAll();

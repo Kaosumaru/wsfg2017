@@ -73,6 +73,9 @@ bool Level::InsertGem(const glm::ivec2& pos, const Gem::pointer& gem)
 
 bool Level::SwapGems(const glm::ivec2& pos1, const glm::ivec2& pos2)
 {
+	if (!containsPosition(pos1) || !containsPosition(pos2))
+		return false;
+
     assert(pos1 != pos2);
     auto gem1 = at(pos1);
     auto gem2 = at(pos2);
@@ -86,6 +89,32 @@ bool Level::SwapGems(const glm::ivec2& pos1, const glm::ivec2& pos2)
     at(pos2) = gem1;
 
     return true;
+}
+
+bool Level::SwapGemsByPlayer(const glm::ivec2& pos1, const glm::ivec2& pos2)
+{
+	if (!containsPosition(pos1) || !containsPosition(pos2))
+		return false;
+
+	auto gem1 = at(pos1);
+	auto gem2 = at(pos2);
+
+	if (gem1 && !gem1->canBeMovedByPlayer())
+		return false;
+	if (gem2 && !gem2->canBeMovedByPlayer())
+		return false;
+
+	//dont allow to swap up/down with empty spaces
+	{
+		auto direction = pos2 - pos1;
+		if (/*direction == Selector::Direction::Up ||*/ direction == glm::ivec2{ 0,1 })
+		{
+			if (!gem1 || !gem2)
+				return false;
+		}
+	}
+
+	return SwapGems(pos1, pos2);
 }
 
 void Level::DestroyGem(const glm::ivec2& pos)

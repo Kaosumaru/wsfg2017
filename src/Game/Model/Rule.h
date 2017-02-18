@@ -44,6 +44,8 @@ namespace BH
                     }
 
                     //TODO check it
+					if (upperGem->_held)
+						continue;
                     upperGem->_falling = true;
                     l.SwapGems({ x,y }, { x,y - 1 });
 

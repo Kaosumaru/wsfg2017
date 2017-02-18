@@ -62,13 +62,25 @@ Player::Player(int number)
 
     _controlSchema.direction.onTick.static_connect([&](auto &v) 
     {
+		bool canMove = false;
 		if (_actions.list().empty() || !_actions.list()[0]->blocksMovement())
-		{
-			_level->selector()->Move(v);
-			return;
-		}
+			canMove = true;
+
         if (!_controlSchema.useSkill.actions[0].state)
-            _level->selector()->Move(v);
+			canMove = true;
+
+		if (canMove)
+		{
+			auto oldPosition = _level->selector()->pos();
+			_level->selector()->Move(v);
+			auto newPosition = _level->selector()->pos();
+
+			if (isHoldingGem() && oldPosition != newPosition)
+			{
+				_level->SwapGems(oldPosition, newPosition);
+			}
+		}
+			
     });
 
 
@@ -76,6 +88,7 @@ Player::Player(int number)
 	{
 		MX::ScriptObjectString script("Game.Player");
 
+#if 0
 		script.load_property(_horizSelector, "HorizSelector");
 		if (!_horizSelector)
 		{
@@ -85,6 +98,7 @@ Player::Player(int number)
 		{
 			_actions.Add(ActionCreator::createHorizSwap());
 		}
+#endif
 
 		std::vector<Action::pointer> actions;
 		script.load_property(actions, "Actions");
@@ -120,6 +134,38 @@ Player::Player(int number)
     //SlowTime - passive
 }
 
+bool Player::HoldGem(const Gem::pointer& gem)
+{
+	bool willHold = gem != nullptr;
+
+	if (isHoldingGem() == willHold)
+	{
+		assert(false);
+		return false;
+	}
+
+	if (gem)
+	{
+		if (gem->_held)
+			return false;
+		if (gem->_frozen)
+			return false;
+		if (gem->_falling)
+			return false;
+		if (gem->_wantToExplode)
+			return false;
+	}
+		
+
+	if (_heldGem)
+		_heldGem->_held = false;
+	_heldGem = gem;
+	if (_heldGem)
+		_heldGem->_held = true;
+
+	//TODO ifdestroyed, stop holding
+}
+
 void Player::Update()
 {
     if (_lost)
@@ -131,6 +177,9 @@ void Player::Update()
     auto g12 = Context<Level>::Lock(_level);
 	_queue.Run();
     _actions.Update();
+
+	if (_heldGem && _heldGem->_wantToExplode)
+		HoldGem(nullptr);
 
     _controlSchema.Run();
     /*

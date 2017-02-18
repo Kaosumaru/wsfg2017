@@ -97,3 +97,25 @@ protected:
 	float _amount = 0.1f;
 };
 MXREGISTER_CLASS(L"Event.ChangeTimeMultiplier", ChangeTimeMultiplierEvent)
+
+class HoldGemEvent : public CommonEvent
+{
+public:
+	HoldGemEvent(MX::LScriptObject& script) : CommonEvent(script)
+	{
+	}
+
+	void Do() override
+	{
+		if (player().isHoldingGem())
+		{
+			player().HoldGem(nullptr);
+			return;
+		}
+		auto position = player().selectorPosition();
+		auto gem = level().at(position);
+		if (gem)
+			player().HoldGem(gem);
+	}
+};
+MXREGISTER_CLASS(L"Event.HoldGem", HoldGemEvent)

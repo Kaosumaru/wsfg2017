@@ -1,0 +1,17 @@
+{
+	Actions:
+	{
+		Hold: Game.Action.Switchable()
+		{
+			Passive: false
+			Switch.On.Events:
+			[
+				Event.HoldGem()[]
+				Event.PlaySound()
+				[
+					Sound.Sample()[ "sounds/swap.ogg" ]
+				]
+			]
+		}
+	}
+}

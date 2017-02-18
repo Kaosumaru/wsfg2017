@@ -26,6 +26,10 @@ Action::Action(const std::string& objectName) : MX::ScriptObjectString(objectNam
 
 bool Action::Do()
 {
+	float multiplier = cooldownMultiplier();
+	if (multiplier <= 0.5f)
+		multiplier = 0.5f;
+
 	if (!_cooldownTimer.Tick(cooldownMultiplier()))
 	{
 		cantDo();
@@ -289,16 +293,16 @@ MXREGISTER_CLASS_DEFAULT(L"Game.Action.GemRain", GemRainAction)
 class SwitchableAction : public Action
 {
 public:
-	SwitchableAction(const std::string& objectName) : Action(objectName) {}
+	SwitchableAction(const std::string& objectName) : Action(objectName) 
+	{
+		load_property_child(_switchOnEvents, "Switch.On.Events");
+	}
 
 
 	bool onDo() override
 	{
 		_wanted = true;
-		if (_state)
-			return true;
-		_state = true;
-		onStateChanged(_state);
+		ChangeState(true);
 
 		return true;
 	}
@@ -309,11 +313,20 @@ protected:
 	{
 		if (_state && !_wanted)
 		{
-			_state = false;
-			onStateChanged(_state);
+			ChangeState(false);
 		}
 
 		_wanted = false;
+	}
+
+	void ChangeState(bool state)
+	{
+		if (_state == state)
+			return;
+		_state = state;
+		onStateChanged(_state);
+		if (_state)
+			_switchOnEvents.Do();
 	}
 
 	virtual void onStateChanged(bool state)
@@ -321,9 +334,12 @@ protected:
 
 	}
 
+	MX::EventHolder   _switchOnEvents;
 	bool _wanted = false;
 	bool _state = false;
 };
+
+MXREGISTER_CLASS_DEFAULT(L"Game.Action.Switchable", SwitchableAction)
 
 class SpeedAction : public SwitchableAction
 {
@@ -370,19 +386,7 @@ std::shared_ptr<Action> ActionCreator::createHorizSwap()
 			glm::ivec2 dir = { 1,0 };
 			auto pos2 = pos1 + dir;
 
-			if (!levelContainsPosition(pos1) || !levelContainsPosition(pos2))
-				return;
-
-			auto gem1 = level().at(pos1);
-			auto gem2 = level().at(pos2);
-
-			if (gem1 && !gem1->canBeMovedByPlayer())
-				return;
-			if (gem2 && !gem2->canBeMovedByPlayer())
-				return;
-
-
-			level().SwapGems(pos1, pos2);
+			level().SwapGemsByPlayer(pos1, pos2);
 			return;
 		}
 

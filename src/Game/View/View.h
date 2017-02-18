@@ -39,8 +39,10 @@ namespace BH
     public:
         SelectorView(const Player::pointer& player, const Selector::pointer& selector);
         glm::vec2 positionFromSelector();
+		void Run() override;
     protected:
         Selector::pointer _selector;
+		Player::pointer _player;
     };
     
 

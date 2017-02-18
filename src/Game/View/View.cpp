@@ -258,6 +258,7 @@ void LevelView::onNewLevel()
 
 SelectorView::SelectorView(const Player::pointer& player, const Selector::pointer& selector)
 {
+	_player = player;
     _selector = selector;
     SetLayouter(player->_horizSelector ? "Game.HorizSelector.Layouter" : "Game.Selector.Layouter");
     SetPosition(positionFromSelector());
@@ -266,6 +267,12 @@ SelectorView::SelectorView(const Player::pointer& player, const Selector::pointe
     {
         SetPosition(positionFromSelector());
     }, this);
+}
+
+void SelectorView::Run()
+{
+	properties().SetValue("Hold", _player->isHoldingGem() ? 1.0f : 0.0f);
+	MX::Widgets::ScriptLayouterWidget::Run();
 }
 
 glm::vec2 SelectorView::positionFromSelector()
