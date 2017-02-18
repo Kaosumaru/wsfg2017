@@ -25,5 +25,13 @@
 
 			]
 		}
+
+		GemRain: Game.Action.GemRain()
+		{
+			Cooldown: 2
+			ManaCost: 4
+			ManaSource: 3
+			Passive: true
+		}		
 	}
 }

@@ -54,6 +54,12 @@ namespace BH
             return true;
         }
 
+		void Reset(float current, float max)
+		{
+			_current = current;
+			_max = max;
+		}
+
         void onDestroyedGems(int amount)
         {
             static std::vector<int> points = { 0, 1, 2, 3, 5, 7 };

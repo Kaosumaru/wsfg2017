@@ -66,13 +66,20 @@ Player::Player(int number)
             _level->selector()->Move(v);
     });
 
-	MX::ScriptObjectString script("Game.Player");
+	{
+		MX::ScriptObjectString script("Game.Player");
 
-	std::vector<Action::pointer> actions;
-	script.load_property(actions, "Actions");
+		std::vector<Action::pointer> actions;
+		script.load_property(actions, "Actions");
 
-	for (auto &action : actions)
-		_actions.Add(action);
+		for (auto &action : actions)
+			_actions.Add(action);
+
+		float health = 25.0f;
+		script.load_property(health, "Health");
+		stats().hp()->Reset(health, health);
+	}
+
 
 #if 0
     if (number < 3)

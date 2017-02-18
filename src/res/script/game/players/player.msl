@@ -1,12 +1,15 @@
 {
 	Game.Player:
 	{
+		Health: 25
 		Actions:
 		[
 			&Actions.Swap
 			Game.Action.Speed()[2.5]
 			&Actions.Attack
 			&Actions.Heal
+			&Actions.GemRain
+			&Actions.Frostbolt
 		]
 	}
 }

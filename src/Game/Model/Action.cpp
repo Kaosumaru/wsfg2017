@@ -220,7 +220,7 @@ class GemRainAction : public Action
 public:
     GemRainAction(const std::string& objectName) : Action(objectName)
     {
-
+		load_property_child(_createGems, "Gems");
     }
 
     bool Do() override
@@ -284,6 +284,7 @@ protected:
     int _createGems = 3;
 };
 
+MXREGISTER_CLASS_DEFAULT(L"Game.Action.GemRain", GemRainAction)
 
 class SwitchableAction : public Action
 {
