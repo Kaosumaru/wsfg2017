@@ -1,0 +1,28 @@
+{
+	Game:
+	{
+		Res.Avatar1: { Class: Image.Image, Path: interface/avatar/avatar.png	}
+		Res.Avatar.BG: { Class: Image.Image, Path: interface/avatar/avatar_bg.png	}
+		Res.Avatar.Fire: { Class: Image.Image, Path: interface/avatar/avatar_fire.png	}
+
+		Avatar.Left: Destination( w:220 h:295 )
+		[
+			Destination( y1:112 x1:7 w:182 h:182 )
+			[
+				Drawer.Image( Pos:5 )[ &Game.Res.Avatar.BG ]
+				Drawer.Image( Pos:5 )[ &Game.Res.Avatar1 ]
+			]
+			Drawer.Image()[ &Game.Res.Avatar.Fire ]
+		]
+
+		Avatar.Right: Destination( w:220 h:295 p:9 )
+		[
+			Destination( y1:112 x1:7 w:182 h:182 )
+			[
+				Drawer.Image( Pos:5 )[ &Game.Res.Avatar.BG ]
+				Drawer.Image( Pos:5 )[ &Game.Res.Avatar1 ]
+			]
+			Drawer.Image()[ &Game.Res.Avatar.Fire ]
+		]
+	}
+}

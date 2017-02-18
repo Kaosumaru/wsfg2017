@@ -46,7 +46,7 @@ namespace BH
     };
     
 
-	std::shared_ptr<MX::Widgets::ScriptLayouterWidget> createHPView(const Player::pointer& player);
+	std::shared_ptr<MX::Widgets::ScriptLayouterWidget> createHPView(const Player::pointer& player, bool flip);
 }
 
 

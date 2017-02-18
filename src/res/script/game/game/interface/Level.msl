@@ -1,9 +1,12 @@
 {
 	Game.Level:
 	{
+		Tiles.Image: { Class: Image.Image, Path:"game/tiles2.png" Wrap:true	}
+
 		Drawer2: Drawer.Composite.Layouter( Size: [522,696] )
 		[
-			Drawer.Color() { Color:[0 0 1 0.3] }
+			//Drawer.Color() { Color:[0 0 1 0.3] }
+			Drawer.MovingTiled()[&Game.Level.Tiles.Image]
 		]
 
 
@@ -32,12 +35,6 @@
 			PostDrawer:Drawer.Composite.Layouter()
 			[
 				Drawer.Image()
-
-				Shift( Margin:10 )
-				[
-					&<Level>.Frame.Drawer
-				]
-
 			]
 		}
 

@@ -1,23 +1,44 @@
 {
 	Game.View.HP:
 	{
-		Drawer: Drawer.Composite.Layouter( Size: [256, 32] )
-		[
-			Drawer.Color() { Color:[1 1 1 1] }
+		Graphic1: { Class: Image.Image, Path: interface/hp1.png	}
+		Graphic2: { Class: Image.Image, Path: interface/hp2.png	}
+		Margin: 150
 
-			Destination( x2:"=Widget.Property('Progress') * &Area.Width " )
+		Drawer: Drawer.Composite.Layouter( Size: [919, 75] )
+		[
+			Drawer.Image()[ &<HP>.Graphic1 ]
+
+			Destination( x:70 y:20 w:817 h:21 )
 			[
-				Drawer.Color() { Color:[1 1 0 1] }
+				Clip( x2:"=&Game.View.HP.Margin + Widget.Property('Progress') * (&Area.Width - &Game.View.HP.Margin) " )
+				[
+					Drawer.Image()[ &<HP>.Graphic2 ]
+				]
+			]
+		]
+
+		Drawer.Flip: Drawer.Composite.Layouter( Size: [919, 75] )
+		[
+			Drawer.TransformedImage( FlipX:true )[ &<HP>.Graphic1 ]
+
+			Destination( x:34 y:20 w:817 h:21 )
+			[
+				Clip( x1:"=( 1.0 - Widget.Property('Progress') ) * (&Area.Width- &Game.View.HP.Margin + 50) " )
+				[
+					Drawer.TransformedImage( FlipX:true )[ &<HP>.Graphic2 ]
+				]
 			]
 		]
 
 
 		Layouter: Layouter.Drawer(
 			Drawer: &<HP>.Drawer
-			)
-		[
+			)[]
 
-		]
+		Layouter.Flip: Layouter.Drawer(
+			Drawer: &<HP>.Drawer.Flip
+			)[]
 
 	}
 }

@@ -1,12 +1,34 @@
 #include "View.h"
 #include "Game/Model/Rule.h"
 #include "Scene/Sprites/ScriptableSpriteActor.h"
+#include "widgets/Drawers/Drawers.h"
+#include "script/ScriptClassParser.h"
 
 using namespace MX;
 using namespace BH;
 using namespace std;
 
 float gem_size = 87.0f;
+
+class MovingTiledDrawer : public MX::Widgets::ImageDrawer
+{
+public:
+	using ImageDrawer::ImageDrawer;
+
+	void DrawImage()
+	{
+		auto &player = Context<Player>::current();
+		auto level = player.level();
+		float scroll = level->movementRule()->cooldownTimer().percent() * gem_size;
+
+
+		float x = Destination::current().x(), y = Destination::current().y();
+		auto rect = Destination::current().rectangle;
+		rect.Shift(-rect.x1, -rect.y1 + scroll );
+		image().DrawArea(Destination::current().rectangle, rect, MX::Widgets::Widget::current().geometry.color);
+	}
+};
+MXREGISTER_CLASS(L"Drawer.MovingTiled", MovingTiledDrawer)
 
 class GemView : public MX::Widgets::ScriptLayouterWidget, public MX::SignalTrackable
 {
@@ -131,9 +153,9 @@ protected:
 class HPView : public MX::Widgets::ScriptLayouterWidget
 {
 public:
-	HPView(const Player::pointer& player)
+	HPView(const Player::pointer& player, bool flip)
 	{
-		SetLayouter("Game.View.HP.Layouter");
+		SetLayouter(flip ? "Game.View.HP.Layouter.Flip" : "Game.View.HP.Layouter");
 		_player = player;
 	}
 
@@ -155,9 +177,9 @@ protected:
 
 namespace BH
 {
-	std::shared_ptr<MX::Widgets::ScriptLayouterWidget> createHPView(const Player::pointer& player)
+	std::shared_ptr<MX::Widgets::ScriptLayouterWidget> createHPView(const Player::pointer& player, bool flip)
 	{
-		return std::make_shared<HPView>(player);
+		return std::make_shared<HPView>(player, flip);
 	}
 }
 
@@ -233,7 +255,7 @@ void LevelView::Draw(float x, float y)
 
 void LevelView::Run()
 {
-    int scroll = _level->movementRule()->cooldownTimer().percent() * gem_size;
+    float scroll = _level->movementRule()->cooldownTimer().percent() * gem_size;
     SetVerticalScroll(scroll);
     MX::Widgets::ScriptLayouterWidget::Run();
 }

@@ -186,15 +186,18 @@ namespace BH
     class LevelMovement : public Rule
     {
     public:
-        LevelMovement() : Rule(6.0f)
+		static float constexpr minTime = 12.0f;
+		static float constexpr maxTime = 0.5;
+
+        LevelMovement() : Rule(minTime)
         {
 
         }
 
         float calculateSpeed()
         {
-            float max = 0.5;
-            float min = 12.0f;
+            float max = maxTime;
+            float min = minTime;
             float game_time = 4 * 60.0f;
 
             float current_time = Context<MX::Time::Timer>::current().total_seconds();

@@ -51,7 +51,7 @@ MainGame::MainGame(int players) : DisplaySceneTimer(MX::Window::current().size()
 
         auto actionsView = std::make_shared<ActionsView>(player);
         bg->AddNamedWidget("Player1.Actions", actionsView);
-		bg->AddNamedWidget("Player1.HP", createHPView(player));
+		bg->AddNamedWidget("Player1.HP", createHPView(player, false));
     }
 
     if (players > 1)
@@ -62,7 +62,7 @@ MainGame::MainGame(int players) : DisplaySceneTimer(MX::Window::current().size()
 
         auto actionsView = std::make_shared<ActionsView>(player);
         bg->AddNamedWidget("Player2.Actions", actionsView);
-		bg->AddNamedWidget("Player2.HP", createHPView(player));
+		bg->AddNamedWidget("Player2.HP", createHPView(player, true));
     }
 
 	{
