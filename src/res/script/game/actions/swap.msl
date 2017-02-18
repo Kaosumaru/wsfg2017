@@ -4,6 +4,7 @@
 		Swap: Game.Action.Swap()
 		{
 			Cooldown: 0.2
+			Passive: false
 			Events:
 			[
 				Event.PlaySound()

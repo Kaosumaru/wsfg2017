@@ -62,3 +62,21 @@ protected:
 	float _damage = 5.0f;
 };
 MXREGISTER_CLASS(L"Event.DamageEnemy", DamageEnemy)
+
+
+class HealEvent : public CommonEvent
+{
+public:
+	HealEvent(MX::LScriptObject& script) : CommonEvent(script)
+	{
+		script.load_property_child( _amount, "Amount" );
+	}
+
+	void Do() override
+	{
+		player().stats().hp()->Gain(_amount);
+	}
+protected:
+	float _amount = 5.0f;
+};
+MXREGISTER_CLASS(L"Event.Heal", HealEvent)

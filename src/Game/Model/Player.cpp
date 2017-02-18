@@ -62,7 +62,7 @@ Player::Player(int number)
 
     _controlSchema.direction.onTick.static_connect([&](auto &v) 
     {
-        if (!_controlSchema.useSkill.anyIsOn())
+        if (!_controlSchema.useSkill.actions[0].state)
             _level->selector()->Move(v);
     });
 

@@ -26,10 +26,17 @@ Action::Action(const std::string& objectName) : MX::ScriptObjectString(objectNam
 
 bool Action::Do()
 {
-    if (!_cooldownTimer.Tick())
-        return false;
+	if (!_cooldownTimer.Tick(cooldownMultiplier()))
+	{
+		cantDo();
+		return false;
+	}
+        
     if (_manaSource && !_manaSource->Pay(_manaCost))
-        return false;
+	{
+		cantDo();
+		return false;
+	}
 
     if (onDo())
     {
@@ -48,6 +55,7 @@ bool Action::Do()
             _cooldownTimer.Start(_cooldown);
         return true;
     }
+	cantDo();
     return false;
 }
 
@@ -275,6 +283,73 @@ public:
 protected:
     int _createGems = 3;
 };
+
+
+class SwitchableAction : public Action
+{
+public:
+	SwitchableAction(const std::string& objectName) : Action(objectName) {}
+
+
+	bool onDo() override
+	{
+		if (_state)
+			return true;
+		_state = true;
+		_wanted = true;
+		onStateChanged(_state);
+
+		return true;
+	}
+
+	void cantDo() override
+	{
+		if (!_state)
+			return ;
+		_state = false;
+		onStateChanged(_state);
+	}
+protected:
+	virtual void Update()
+	{
+		if (_state && !_wanted)
+		{
+			_state = false;
+			onStateChanged(_state);
+		}
+
+		_wanted = false;
+	}
+
+	virtual void onStateChanged(bool state)
+	{
+
+	}
+
+	bool _wanted = false;
+	bool _state = false;
+};
+
+class SpeedAction : public SwitchableAction
+{
+public:
+	SpeedAction(const std::string& objectName) : SwitchableAction(objectName) 
+	{
+		load_property_child(_multiplier, "Multiplier");
+	}
+
+
+protected:
+	void onStateChanged(bool state) override
+	{
+		Context<Player>::current()._speedMultiplier += state ? _multiplier : -_multiplier;
+	}
+
+	float _multiplier = 2.0f;
+};
+
+MXREGISTER_CLASS_DEFAULT(L"Game.Action.Speed", SpeedAction)
+
 
 std::shared_ptr<Action> ActionCreator::createSwap()
 {

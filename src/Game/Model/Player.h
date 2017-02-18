@@ -45,6 +45,8 @@ namespace BH
         SignalizingVariable<bool> _lost = false;
 
         int number() { return _number; }
+
+		float _speedMultiplier = 1.0f;
     protected:
         int                 _number = 0;
         Stats               _stats;

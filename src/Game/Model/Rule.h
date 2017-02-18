@@ -206,6 +206,11 @@ namespace BH
 
         }
 
+		float cooldownMultiplier() override
+		{ 
+			return Context<Player>::current()._speedMultiplier; 
+		}
+
         bool onDo() override
         {
             if (first)

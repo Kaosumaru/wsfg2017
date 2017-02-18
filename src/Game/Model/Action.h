@@ -69,7 +69,7 @@ namespace BH
         glm::ivec2 wantsDelta();
 
         virtual bool Do();
-        void Update()
+        virtual void Update()
         {
             if (_passive)
                 Do();
@@ -111,11 +111,16 @@ namespace BH
 
         auto& drawer() { return _drawer; }
         bool passive() { return _passive; }
+		virtual float cooldownMultiplier() { return 1.0f; }
     protected:
         virtual bool onDo()
         {
             return true;
         }
+		virtual void cantDo()
+		{
+			
+		}
 
         bool _passive = false;
         glm::ivec2 _selectedGemPos = { -1,-1 };
@@ -124,7 +129,7 @@ namespace BH
         Mana::pointer _manaSource;
         float _manaCost = 0.0f;
         float _cooldown = 0.0f;
-        MX::Time::ManualStopWatchAbsolute   _cooldownTimer;
+        MX::Time::ManualStopWatch   _cooldownTimer;
         MX::EventHolder   _doEvents;
         MX::EventHolder   _gemEvents;
 
