@@ -3,14 +3,14 @@
 	{
 		Char1.Animations:
 		{
-			Position: [740 130]
+			Position: [740 140]
 			//centrum spodniczki
 			Idle: Animation.AnimationFromFiles()
 			{
 				Frames_count: 2
-				Filename_template: "chars/1/idle%d.png"
+				Filename_template: "chars/2/kot_idle%d.png"
 				Frame_duration: 0.5
-				Frame_pivot: [69 100]
+				Frame_pivot: [127 161]
 			}
 
 		}
