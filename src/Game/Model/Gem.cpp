@@ -21,6 +21,10 @@ Gem::pointer Gem::random()
 void Gem::Freeze()
 {
 	if (!_frozen)
-		MX::FunctorsQueue::current().planWeakFunctor(7.0f, [&]() { _frozen = false; }, shared_from_this());
+	{
+		auto &queue = MX::FunctorsQueue::current();
+		queue.planWeakFunctor(7.0f, [&]() { _frozen = false; }, shared_from_this());
+	}
+		
 	_frozen = true;
 }

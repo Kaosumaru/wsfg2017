@@ -7,7 +7,7 @@
 #include <cmath>
 namespace BH
 {
-    class Gem : std::enable_shared_from_this<Gem>
+    class Gem : public std::enable_shared_from_this<Gem>
     {
     public:
         friend class Level;
