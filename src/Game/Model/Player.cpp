@@ -108,7 +108,7 @@ Player::Player(int number)
 
 		float health = 25.0f;
 		script.load_property(health, "Health");
-		stats().hp()->Reset(0.01f, health);
+		stats().hp()->Reset(health, health);
 	}
 
 

@@ -42,7 +42,7 @@
 			]
 			Drawer.Image()[ Image.Image()["game/gradient_sky.png"] ]
 
-			Destination( x1:10 y1:140 )
+			Destination( x1:60 x2:-10 y1:140 )
 			[
 				&Game.Avatar.Left
 
@@ -61,7 +61,7 @@
 			Drawer: &Game.Drawer
 			)
 		[
-			Destination( x1:35 x2:-26 y1:270 )
+			Destination( x1:45 x2:-36 y1:270 )
 			[
 				Layout( n:Player1.HP p:7 )
 				Layout( n:Player2.HP p:9 )
