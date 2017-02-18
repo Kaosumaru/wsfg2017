@@ -1,0 +1,18 @@
+{
+	Game:
+	{
+		Char1.Animations:
+		{
+			Position: [740 130]
+			//centrum spodniczki
+			Idle: Animation.AnimationFromFiles()
+			{
+				Frames_count: 2
+				Filename_template: "chars/1/idle%d.png"
+				Frame_duration: 0.5
+				Frame_pivot: [69 100]
+			}
+
+		}
+	}
+}

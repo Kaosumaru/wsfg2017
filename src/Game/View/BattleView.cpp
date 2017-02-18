@@ -8,12 +8,63 @@ using namespace BH;
 class PlayerView : public MX::Widgets::ScriptLayouterWidget
 {
 public:
-	PlayerView(const Player::pointer& player)
+	PlayerView(const Player::pointer& player, bool left)
 	{
+		_left = left;
+
 		SetLayouter("Game.Player.View.Layouter");
+		Script::onParsed.static_connect([&]() { onReload(); });
+		onReload();
+	}
+
+	void onReload()
+	{
+		const std::string path = _left ? "Game.Char0.Animations" : "Game.Char1.Animations";
+		ScriptObjectString script(path);
+		script.load_property(_position, "Position");
+
+
+		loadAnimation(script, "Idle");
+	}
+
+	void loadAnimation(ScriptObjectString& script, const std::string& name)
+	{
+		std::shared_ptr<Graphic::SingleAnimation> animation;
+		script.load_property(animation, name);
+		auto anim = Graphic::Animation::Create(animation);
+		_animations[name] = anim;
+
+		if (!_idle)
+		{
+			_idle = anim;
+			_current = anim;
+		}
+	}
+
+	void Run() override
+	{
+		if (_current)
+			_current->AdvanceTime(Time::Timer::current().elapsed_seconds());
+	}
+
+	void Draw(float x, float y) override
+	{
+		MX::Widgets::ScriptLayouterWidget::Draw(x, y);
+
+		glm::vec2 p{ x,y };
+
+		Graphic::Image::Settings::flipX = !_left;
+		if (_current)
+			_current->Draw(_position + p);
+		Graphic::Image::Settings::flipX = false;
 	}
 
 protected:
+	bool _left;
+	std::map<std::string, std::shared_ptr<Graphic::Animation>> _animations;
+	std::shared_ptr<Graphic::Animation> _idle;
+	std::shared_ptr<Graphic::Animation> _current;
+	glm::vec2 _position;
 };
 
 
@@ -25,9 +76,9 @@ public:
 		SetLayouter("Game.Battle.View.Layouter");
 
 		if (player1)
-			AddNamedWidget("Player1", std::make_shared<PlayerView>(player1));
+			AddNamedWidget("Player1", std::make_shared<PlayerView>(player1, true));
 		if (player2)
-			AddNamedWidget("Player2", std::make_shared<PlayerView>(player2));
+			AddNamedWidget("Player2", std::make_shared<PlayerView>(player2, false));
 	}
 
 protected:

@@ -3,7 +3,7 @@
 	{
 		Drawer: Drawer.Composite.Layouter( Size: [900,275] )
 		[
-			Drawer.Color() { Color:[0 0 0 0.5] }
+			//Drawer.Color() { Color:[0 0 0 0.5] }
 		]
 
 

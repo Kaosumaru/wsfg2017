@@ -27,6 +27,18 @@
 			]
 
 			Drawer.Image()[ Image.Image()["game/particle.png"] ]
+
+			Destination( y1:320 )
+			[
+				Drawer.Image( Pos:4 )[ Image.Image()["game/skill_bg.png"] ]
+
+				Transform( flipX:true )
+				[
+					Drawer.Image( Pos:6 )[ Image.Image()["game/skill_bg.png"] ]
+				]
+
+			]
+
 		]
 
 		DrawerFG: Drawer.Composite.Layouter()
