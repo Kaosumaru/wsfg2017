@@ -1,9 +1,9 @@
 {
-	Game.Battle.View:
+	Game.Player.View:
 	{
-		Drawer: Drawer.Composite.Layouter( Size: [900,275] )
+		Drawer: Drawer.Composite.Layouter()
 		[
-			Drawer.Color() { Color:[0 0 0 0.5] }
+			Drawer.Color() { Color:[1 0 0 0.5] }
 		]
 
 
@@ -13,6 +13,7 @@
 		[
 			Layout( n:Player1 )
 			Layout( n:Player2 )
+
 		]
 
 	}
