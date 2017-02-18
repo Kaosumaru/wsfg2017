@@ -20,7 +20,7 @@
 				tr( h:20 )
 				tr()
 				[
-
+					Layout( n:BattleView p:2 )
 				]
 				tr( h:20 )
 				tr( h:750 )

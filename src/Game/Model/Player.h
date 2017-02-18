@@ -23,6 +23,11 @@ namespace BH
         MX::Game::ActionList<MX::Game::Action, 4> useSkill{ this };
     };
 
+	struct PlayerEvent
+	{
+		std::string name;
+	};
+
     class Player
     {
     public:
@@ -51,6 +56,8 @@ namespace BH
 
 		bool isHoldingGem() { return _heldGem != nullptr; }
 		bool HoldGem(const Gem::pointer& gem);
+
+		MX::Signal<void(const PlayerEvent&)> onEvent;
     protected:
         int                 _number = 0;
         Stats               _stats;

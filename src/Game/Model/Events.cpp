@@ -119,3 +119,21 @@ public:
 	}
 };
 MXREGISTER_CLASS(L"Event.HoldGem", HoldGemEvent)
+
+
+class PlayerEventEvent : public CommonEvent
+{
+public:
+	PlayerEventEvent(MX::LScriptObject& script) : CommonEvent(script)
+	{
+		script.load_property_child( _event.name, "Name" );
+	}
+
+	void Do() override
+	{
+		player().onEvent(_event);
+	}
+protected:
+	PlayerEvent _event;
+};
+MXREGISTER_CLASS(L"Event.PlayerEvent", PlayerEventEvent)

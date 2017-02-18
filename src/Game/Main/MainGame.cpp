@@ -22,6 +22,7 @@
 #include "Widgets/Layouters/ScriptLayouters.h"
 
 #include "Game/View/View.h"
+#include "Game/View/BattleView.h"
 #include "SDL_keycode.h"
 
 using namespace MX;
@@ -63,6 +64,14 @@ MainGame::MainGame(int players) : DisplaySceneTimer(MX::Window::current().size()
         bg->AddNamedWidget("Player2.Actions", actionsView);
 		bg->AddNamedWidget("Player2.HP", createHPView(player));
     }
+
+	{
+		auto player = _game->players()[0];
+		Player::pointer player2 = players > 1 ? _game->players()[1] : nullptr;
+
+		auto view = createBattleView(player, player2);
+		bg->AddNamedWidget("BattleView", view);
+	}
 
     _game->onGameWon.connect([&](int r) { onGameWon(r); }, this);
     MX::Window::current().keyboard()->on_specific_key_down[SDL_SCANCODE_ESCAPE].connect(std::bind(&MainGame::onExit, this), this);

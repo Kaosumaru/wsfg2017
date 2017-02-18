@@ -1,0 +1,18 @@
+{
+	Game.Battle.View:
+	{
+		Drawer: Drawer.Composite.Layouter( Size: [900,275] )
+		[
+			Drawer.Color() { Color:[0 0 0 0.5] }
+		]
+
+
+		Layouter: Layouter.Drawer(
+			Drawer: &<View>.Drawer
+			)
+		[
+
+		]
+
+	}
+}
