@@ -19,13 +19,13 @@
 			{ Class: Image.Image, Path: gems/4markglowing.png	}
 		]
 
-		BGDrawer: Drawer.StretchedImage( Image:&<Gem>.Graphic.0 )
+		BGDrawer: Drawer.Image( Image:&<Gem>.Graphic.0 Pos:5 )
 		{
 			//Color: [1 1 1 "=if(&Gem.ExplosionPercent > 0.75, (1 - (&Gem.ExplosionPercent - 0.75))*4, 1 )"]
 			Color: [1 1 1 "=1 - if(&Gem.ExplosionPercent > 0.75, (&Gem.ExplosionPercent - 0.75) * 4, 0)"]
 		}
 
-		GlowingDrawer: Drawer.StretchedImage( Image:&<Gem>.Graphic.0 )
+		GlowingDrawer: Drawer.Image( Image:&<Gem>.Graphic.0 Pos:5 )
 		{
 			Color: [1 1 1 "=&Gem.ExplosionPercent"]
 		}
