@@ -37,7 +37,7 @@ namespace BH
     class SelectorView : public MX::Widgets::ScriptLayouterWidget, public MX::SignalTrackable
     {
     public:
-        SelectorView(const Selector::pointer& selector);
+        SelectorView(const Player::pointer& player, const Selector::pointer& selector);
         glm::vec2 positionFromSelector();
     protected:
         Selector::pointer _selector;

@@ -2,9 +2,9 @@
 	Game.Player:
 	{
 		Health: 25
+		HorizSelector: false
 		Actions:
 		[
-			&Actions.Swap
 			Game.Action.Speed()[2.5]
 			&Actions.Attack
 			&Actions.Heal

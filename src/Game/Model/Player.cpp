@@ -62,12 +62,29 @@ Player::Player(int number)
 
     _controlSchema.direction.onTick.static_connect([&](auto &v) 
     {
+		if (_actions.list().empty() || !_actions.list()[0]->blocksMovement())
+		{
+			_level->selector()->Move(v);
+			return;
+		}
         if (!_controlSchema.useSkill.actions[0].state)
             _level->selector()->Move(v);
     });
 
+
+
 	{
 		MX::ScriptObjectString script("Game.Player");
+
+		script.load_property(_horizSelector, "HorizSelector");
+		if (!_horizSelector)
+		{
+			_actions.Add(ActionCreator::createSwap());
+		}
+		else
+		{
+			_actions.Add(ActionCreator::createHorizSwap());
+		}
 
 		std::vector<Action::pointer> actions;
 		script.load_property(actions, "Actions");

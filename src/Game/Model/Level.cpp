@@ -21,6 +21,12 @@ bool Selector::Move(const glm::ivec2& delta)
     if (!level.containsPosition(new_position))
         return false;
 
+	if (Context<Player>::current()._horizSelector)
+	{
+		if (new_position.x >= level.width() - 1)
+			return false;
+	}
+
     if (new_position.y == 0 || new_position.y == level.height() - 1)
         return false;
 

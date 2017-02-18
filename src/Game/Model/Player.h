@@ -19,7 +19,7 @@ namespace BH
 
         void SetupForPlayer(int number);
 
-        MX::Game::TickingTargetDirection<glm::ivec2> direction{ this, 0.1f };
+        MX::Game::TickingTargetDirection<glm::ivec2> direction{ this, 0.125f };
         MX::Game::ActionList<MX::Game::Action, 4> useSkill{ this };
     };
 
@@ -47,6 +47,7 @@ namespace BH
         int number() { return _number; }
 
 		float _speedMultiplier = 1.0f;
+		bool _horizSelector = false;
     protected:
         int                 _number = 0;
         Stats               _stats;

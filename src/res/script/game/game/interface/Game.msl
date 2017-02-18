@@ -1,31 +1,13 @@
 {
 	Game:
 	{
-		ShaderDrawer: Drawer.Color.Shader()
-		{
-			Shader: Shader.Uniform.Timed()
-			{
-				VertexPath: Shaders/instanced.vertex
-				FragmentPath: Shaders/menu/background.fragment
 
-				Name: BackShader
-
-				Defines:
-				[
-				]
-
-				Debug: true
-				Debug.Uniforms:
-				[
-					GL.Uniform.Float( n:time_m v:1 step:0.01)
-				]
-			}
-		}
 
 		Drawer: Drawer.Composite.Layouter()
 		[
 			//&<Game>.ShaderDrawer
 			Drawer.Color() { Color:[1 0 1 0.3] }
+			Drawer.Image()[ Image.Image()["game/bg.png"] ]
 		]
 
 
@@ -38,9 +20,7 @@
 				tr( h:20 )
 				tr()
 				[
-					td()
-					td( w:1024 )[ Drawer.Color() { Color:[1 1 1 1] } ]
-					td()
+
 				]
 				tr( h:20 )
 				tr( h:750 )

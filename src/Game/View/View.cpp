@@ -187,7 +187,7 @@ LevelView::LevelView(const Player::pointer& player, const Level::pointer& level)
     _level = level;
     SetLayouter("Game.Level.Layouter");
 
-    auto selectorView = std::make_shared<SelectorView>(_level->selector());
+    auto selectorView = std::make_shared<SelectorView>(player, _level->selector());
     AddNamedWidget("Selector", selectorView);
 
     onNewLevel();
@@ -256,10 +256,10 @@ void LevelView::onNewLevel()
 
 
 
-SelectorView::SelectorView(const Selector::pointer& selector)
+SelectorView::SelectorView(const Player::pointer& player, const Selector::pointer& selector)
 {
     _selector = selector;
-    SetLayouter("Game.Selector.Layouter");
+    SetLayouter(player->_horizSelector ? "Game.HorizSelector.Layouter" : "Game.Selector.Layouter");
     SetPosition(positionFromSelector());
 
     _selector->position.onValueChanged.connect([&](auto&...)

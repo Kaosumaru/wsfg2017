@@ -1,0 +1,24 @@
+{
+	Game.HorizSelector:
+	{
+		Graphic: { Class: Image.Image, Path: selector/Selector.png	}
+
+		Drawer: Drawer.Composite.Layouter( Size: [174,87] )
+		[
+			Table()
+			[
+				td()[Drawer.StretchedImage( Image:&<Selector>.Graphic )]
+				td()[Drawer.StretchedImage( Image:&<Selector>.Graphic )]
+			]
+
+		]
+
+		Layouter: Layouter.Drawer(
+			Drawer: &<HorizSelector>.Drawer
+			)
+		[
+
+		]
+
+	}
+}

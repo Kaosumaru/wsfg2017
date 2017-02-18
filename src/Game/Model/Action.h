@@ -111,6 +111,7 @@ namespace BH
 
         auto& drawer() { return _drawer; }
         bool passive() { return _passive; }
+		bool blocksMovement() { return _blocksMovement; }
 		virtual float cooldownMultiplier() { return 1.0f; }
     protected:
         virtual bool onDo()
@@ -122,6 +123,7 @@ namespace BH
 			
 		}
 
+		bool _blocksMovement = false;
         bool _passive = false;
         glm::ivec2 _selectedGemPos = { -1,-1 };
         bool _selectedGemPosAtEnemy = false;
@@ -139,7 +141,10 @@ namespace BH
     class SwapGemsAction : public Action
     {
     public:
-        SwapGemsAction(const std::string& objectName) : Action(objectName) {}
+        SwapGemsAction(const std::string& objectName) : Action(objectName) 
+		{
+			_blocksMovement = true;
+		}
 
         bool Do()
         {
@@ -224,6 +229,7 @@ namespace BH
     struct ActionCreator
     {
         static std::shared_ptr<Action> createSwap();
+		static std::shared_ptr<Action> createHorizSwap();
 		static std::shared_ptr<Action> createAttack();
         static std::shared_ptr<Action> createFireball();
         static std::shared_ptr<Action> createFrostbolt();

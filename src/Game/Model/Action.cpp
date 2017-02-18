@@ -294,22 +294,16 @@ public:
 
 	bool onDo() override
 	{
+		_wanted = true;
 		if (_state)
 			return true;
 		_state = true;
-		_wanted = true;
 		onStateChanged(_state);
 
 		return true;
 	}
 
-	void cantDo() override
-	{
-		if (!_state)
-			return ;
-		_state = false;
-		onStateChanged(_state);
-	}
+
 protected:
 	virtual void Update()
 	{
@@ -355,6 +349,46 @@ MXREGISTER_CLASS_DEFAULT(L"Game.Action.Speed", SpeedAction)
 std::shared_ptr<Action> ActionCreator::createSwap()
 {
     return std::make_shared<SwapGemsAction>("Actions.Swap");
+}
+
+std::shared_ptr<Action> ActionCreator::createHorizSwap()
+{
+	class HorizSwapGemsAction : public SwitchableAction
+	{
+	public:
+		HorizSwapGemsAction(const std::string& objectName) : SwitchableAction(objectName) 
+		{
+
+		}
+
+
+		void onStateChanged(bool state) override
+		{
+			if (!state)
+				return;
+			auto pos1 = selectorPosition();
+			glm::ivec2 dir = { 1,0 };
+			auto pos2 = pos1 + dir;
+
+			if (!levelContainsPosition(pos1) || !levelContainsPosition(pos2))
+				return;
+
+			auto gem1 = level().at(pos1);
+			auto gem2 = level().at(pos2);
+
+			if (gem1 && !gem1->canBeMovedByPlayer())
+				return;
+			if (gem2 && !gem2->canBeMovedByPlayer())
+				return;
+
+
+			level().SwapGems(pos1, pos2);
+			return;
+		}
+
+	};
+
+	return std::make_shared<HorizSwapGemsAction>("Actions.HorizSwap");
 }
 
 std::shared_ptr<Action> ActionCreator::createAttack()

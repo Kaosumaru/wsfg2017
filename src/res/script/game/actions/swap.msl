@@ -13,5 +13,10 @@
 				]
 			]
 		}
+
+		HorizSwap: Game.Action.HorizSwap()
+		{
+			Passive: false
+		}
 	}
 }
