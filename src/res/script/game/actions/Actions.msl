@@ -38,7 +38,7 @@
 
 		SlowTime: Game.Action()
 		{
-			Cooldown: 2
+			Cooldown: 3
 			ManaCost: 4
 			ManaSource: 4
 			Passive: true
