@@ -3,7 +3,8 @@
 	{
 		Char1.Animations:
 		{
-			Position: [740 140]
+			Position: [740 160]
+			Scale: 0.75
 			//centrum spodniczki
 			Idle: Animation.AnimationFromFiles()
 			{

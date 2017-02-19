@@ -1,0 +1,24 @@
+{
+	GUI.Credits:
+	{
+
+		Image.BG: { Class: Image.Image, Path: menu/credits.png	}
+
+		Drawer: Drawer.Composite.Layouter()
+		[
+			Drawer.Image() { Image: &<Credits>.Image.BG }
+		]
+
+
+		Layouter: Layouter.Drawer(
+			Drawer: &<Credits>.Drawer
+			)
+		[
+			Layout( n:Button.Exit )
+		]
+
+
+
+	}
+
+}

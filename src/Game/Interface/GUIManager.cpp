@@ -19,13 +19,32 @@
 #include "Game/GameInitializer.h"
 #include "Game/Main/MainGame.h"
 #include "Widgets/Animations/Animations.h"
-
+#include "Sound/Stream.h"
 
 using namespace MX;
 using namespace BH;
 using namespace std;
 
 
+class MCreditsScene : public MX::FullscreenDisplayScene, public MX::SignalTrackable
+{
+	std::shared_ptr<MX::Widgets::ScriptLayouterWidget> _bgLayouter;
+public:
+	MCreditsScene()
+	{
+		{
+			auto bg = std::make_shared<MX::Widgets::ScriptLayouterWidget>();
+			bg->AddStrategy(std::make_shared<MX::Strategies::FillInParent>());
+			bg->SetLayouter("GUI.Credits.Layouter");
+			AddActor(bg);
+			_bgLayouter = bg;
+		}
+
+		auto button = std::make_shared<MX::Widgets::LabelButton>(L"");
+		_bgLayouter->AddNamedWidget("Button.Exit", button);
+		button->onClicked.connect([&]() { SpriteSceneStackManager::manager_of(this)->PopScene(std::make_shared<MoveBitmapTransition>(false)); }, this);
+	}
+};
 
 
 class MMenuScene : public MX::FullscreenDisplayScene, public MX::SignalTrackable
@@ -50,8 +69,8 @@ public:
             return button;
         };
 
-        addButton("Button.Game")->onClicked.connect([&]() { OnGame(1); }, this);
-        addButton("Button.Game2")->onClicked.connect([&]() { OnGame(2); }, this);
+        addButton("Button.Game")->onClicked.connect([&]() { OnGame(2); }, this);
+        addButton("Button.Credits")->onClicked.connect([&]() { OnCredits(); }, this);
         addButton("Button.Exit")->onClicked.connect([&]() { OnExit(); }, this);
 
     }
@@ -65,6 +84,12 @@ public:
         else
             SpriteSceneStackManager::manager_of(this)->PushScene(game, nullptr);
     }
+
+	void OnCredits()
+	{
+		auto credits = std::make_shared<MCreditsScene>();
+		SpriteSceneStackManager::manager_of(this)->PushScene(credits, std::make_shared<MoveBitmapTransition>(true));
+	}
 protected:
 
     void OnExit()
@@ -76,7 +101,6 @@ protected:
 
 
 
-
 GuiManager::GuiManager()
 {
     auto menu = std::make_shared<MMenuScene>();
@@ -84,7 +108,7 @@ GuiManager::GuiManager()
 
 	GameInitializer::Init();
 #ifndef MX_GAME_RELEASE
-    menu->OnGame(2, false);
+//    menu->OnGame(2, false);
 #endif
 }
 

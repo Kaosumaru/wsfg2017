@@ -82,7 +82,7 @@ MainGame::MainGame(int players) : DisplaySceneTimer(MX::Window::current().size()
 
 void MainGame::PlayGameMusic()
 {
-    auto musicPath = "audio/music/InfiniteDescent.ogg";
+    auto musicPath = "audio/music/game.ogg";
     MX::Sound::StreamManager::get().SetCurrent(Resources::get().loadStream(musicPath));
 }
 

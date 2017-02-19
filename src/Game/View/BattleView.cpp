@@ -22,7 +22,7 @@ public:
 		const std::string path = _left ? "Game.Char0.Animations" : "Game.Char1.Animations";
 		ScriptObjectString script(path);
 		script.load_property(_position, "Position");
-
+		script.load_property(_scale, "Scale");
 
 		loadAnimation(script, "Idle");
 	}
@@ -41,10 +41,15 @@ public:
 		}
 	}
 
+	auto currentAnimation()
+	{
+		return _current;
+	}
+
 	void Run() override
 	{
-		if (_current)
-			_current->AdvanceTime(Time::Timer::current().elapsed_seconds());
+		if (currentAnimation())
+			currentAnimation()->AdvanceTime(Time::Timer::current().elapsed_seconds());
 	}
 
 	void Draw(float x, float y) override
@@ -54,12 +59,15 @@ public:
 		glm::vec2 p{ x,y };
 
 		Graphic::Image::Settings::flipX = !_left;
-		if (_current)
-			_current->Draw(_position + p);
+
+		auto pos = _position + p;
+		if (currentAnimation())
+			currentAnimation()->DrawScaled({}, pos, { _scale, _scale });
 		Graphic::Image::Settings::flipX = false;
 	}
 
 protected:
+	float _scale = 1.0f;
 	bool _left;
 	std::map<std::string, std::shared_ptr<Graphic::Animation>> _animations;
 	std::shared_ptr<Graphic::Animation> _idle;
