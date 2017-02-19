@@ -50,6 +50,22 @@ void PlayerControlSchema::SetupForPlayer(int number)
 
 Player::Player(int number)
 {
+	{
+		MX::ScriptObjectString script("Game.Player");
+		float minTime = 12.0f;
+		float maxTime = 0.5;
+		float game_time = 4 * 60.0f;
+
+		script.load_property(minTime, "MinSpeed");
+		script.load_property(maxTime, "MaxSpeed");
+		script.load_property(game_time, "GameDuration");
+
+		_level = std::make_shared<Level>(minTime, maxTime, game_time);
+	}
+
+
+
+
     _number = number;
     auto g1 = Context<Player>::Lock(this);
     auto g12 = Context<Level>::Lock(_level);

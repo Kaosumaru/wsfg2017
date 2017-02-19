@@ -51,7 +51,7 @@ namespace BH
     public:
         using pointer = std::shared_ptr<Level>;
 
-        Level();
+        Level(float minSpeed, float maxSpeed, float duration);
 
         bool InsertGem(const glm::ivec2& pos, const Gem::pointer& gem);
         bool SwapGems(const glm::ivec2& pos1, const glm::ivec2& pos2);

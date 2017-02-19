@@ -47,7 +47,7 @@ void Selector::ForceMove(Direction direction)
     return;
 }
 
-Level::Level()
+Level::Level(float minSpeed, float maxSpeed, float duration)
 {
     _rules = std::make_shared<ActionList>();
     _rules->Add(std::make_shared<GravityRule>());
@@ -55,7 +55,7 @@ Level::Level()
 	_rules->Add(std::make_shared<DeathRule>());
 	
 
-    _movementRule = std::make_shared<LevelMovement>();
+    _movementRule = std::make_shared<LevelMovement>(minSpeed, maxSpeed, duration);
     _rules->Add(_movementRule);
 
     _gems.resize(_width * _height);

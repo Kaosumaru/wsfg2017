@@ -62,7 +62,7 @@ namespace BH
         int                 _number = 0;
         Stats               _stats;
         
-        Level::pointer _level = std::make_shared<Level>();
+		Level::pointer _level;
         ActionList _actions;
         PlayerControlSchema _controlSchema;
 		MX::Time::SimpleTimer _timer;

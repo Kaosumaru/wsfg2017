@@ -3,35 +3,7 @@
 	{
 		Flashing: "= 1 + if( &Action.CanPay, math.abs( math.sin( time.now()*6 ) ) * 0.5, 0 )"
 
-		Attack: Game.Action()
-		{
-			Cooldown: 0.5
-			ManaCost: 3
-			Passive: true
-			ManaSource: 2
-			Drawer:	Drawer.Composite.Switch(
-					Condition:"=&Player.Number"
-					Default: Drawer.Image( Color:[&<Actions>.Flashing &<Actions>.Flashing &<Actions>.Flashing "=0.5 + &Action.CanPay * 0.5"] )[ { Class: Image.Image, Path: interface/ExplosionIconBlue.png	} ]
-				)
-			[
-				[1 Drawer.Image( Color:[&<Actions>.Flashing &<Actions>.Flashing &<Actions>.Flashing "=0.5 + &Action.CanPay * 0.5"] )[ { Class: Image.Image, Path: interface/ExplosionIconRed.png	} ] ]
-			]
 
-			Events:
-			[
-				Event.PlaySound()
-				[
-					Sound.Sample()[ "sounds/Explosion.ogg" ]
-				]
-
-				Event.DamageEnemy()[5]
-			]
-
-			Gem.Events:
-			[
-
-			]
-		}
 
 	}
 }

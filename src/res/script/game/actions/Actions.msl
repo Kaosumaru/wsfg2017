@@ -1,6 +1,72 @@
 {
 	Actions:
 	{
+		//czerwona runa R
+		Attack: Game.Action()
+		{
+			Cooldown: 0.5
+			ManaCost: 3
+			Passive: true
+			ManaSource: 3
+			Drawer:	Drawer.Composite.Switch(
+					Condition:"=&Player.Number"
+					Default: Drawer.Image( Color:[&<Actions>.Flashing &<Actions>.Flashing &<Actions>.Flashing "=0.5 + &Action.CanPay * 0.5"] )[ { Class: Image.Image, Path: interface/ExplosionIconBlue.png	} ]
+				)
+			[
+				[1 Drawer.Image( Color:[&<Actions>.Flashing &<Actions>.Flashing &<Actions>.Flashing "=0.5 + &Action.CanPay * 0.5"] )[ { Class: Image.Image, Path: interface/ExplosionIconRed.png	} ] ]
+			]
+
+			Events:
+			[
+				Event.PlaySound()
+				[
+					Sound.Sample()[ "sounds/Explosion.ogg" ]
+				]
+
+				Event.DamageEnemy()[5]
+			]
+
+			Gem.Events:
+			[
+
+			]
+		}
+
+		//niebieska runa
+		Frostbolt: Game.Action.Frostbolt()
+		{
+			Cooldown: 0.5
+			Passive: true
+			ManaCost: 7
+			ManaSource: 0
+
+			Drawer:	Drawer.Composite.Switch(
+					Condition:"=&Player.Number"
+					Default: Drawer.Image( Color:[&<Actions>.Flashing &<Actions>.Flashing &<Actions>.Flashing  "=0.5 + &Action.CanPay * 0.5"] )[ { Class: Image.Image, Path: interface/FreezeIconBlue.png	} ]
+				)
+			[
+				[1 Drawer.Image( Color:[&<Actions>.Flashing &<Actions>.Flashing &<Actions>.Flashing  "=0.5 + &Action.CanPay * 0.5"] )[ { Class: Image.Image, Path: interface/FreezeIconRed.png	} ] ]
+			]
+
+			Events:
+			[
+				Event.PlaySound()
+				[
+					Sound.Sample()[ "sounds/Freeze.ogg" ]
+				]
+			]
+
+			Gem.Events:
+			[
+				Event.Sprite.CreateSprite()
+				{
+					Sprite: &Game.Effects.Freeze
+				}
+			]
+
+		}
+
+		//zielona runa
 		Heal: Game.Action()
 		{
 			Cooldown: 0.5
@@ -28,11 +94,12 @@
 			]
 		}
 
+		//
 		GemRain: Game.Action.GemRain()
 		{
 			Cooldown: 2
 			ManaCost: 4
-			ManaSource: 3
+			ManaSource: 2
 			Passive: true
 		}
 
