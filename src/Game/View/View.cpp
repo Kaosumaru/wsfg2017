@@ -64,6 +64,11 @@ public:
             properties().SetValue("Frozen", v ? 1.0f : 0.0f);
         }, this);
 
+		_gem->_held.onValueChanged.connect([&](const bool &v, const bool & old)
+		{
+			properties().SetValue("Held", v ? 1.0f : 0.0f);
+		}, this);
+
     }
 
     static auto from(const Gem::pointer& gem)

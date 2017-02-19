@@ -10,6 +10,15 @@
 			{ Class: Image.Image, Path: gems/4.png	}
 		]
 
+		GraphicGlow:
+		[
+			{ Class: Image.Image, Path: gems/0_glow.png	}
+			{ Class: Image.Image, Path: gems/1_glow.png	}
+			{ Class: Image.Image, Path: gems/2_glow.png	}
+			{ Class: Image.Image, Path: gems/3_glow.png	}
+			{ Class: Image.Image, Path: gems/4_glow.png	}
+		]
+
 		GraphicGlowing:
 		[
 			{ Class: Image.Image, Path: gems/0markglowing.png	}
@@ -45,6 +54,20 @@
 				[2 { Prototype:&<Gem>.BGDrawer Image:&<Gem>.Graphic.2 } ]
 				[3 { Prototype:&<Gem>.BGDrawer Image:&<Gem>.Graphic.3 } ]
 				[4 { Prototype:&<Gem>.BGDrawer Image:&<Gem>.Graphic.4 } ]
+			]
+
+			Drawer.Composite.If( Condition:"=Widget.Property('Held') == 1" )
+			[
+				Drawer.Composite.Switch(
+						Condition:"=Widget.Property('GemType')"
+					)
+				[
+					[0 { Prototype:&<Gem>.BGDrawer Image:&<Gem>.GraphicGlow.0 } ]
+					[1 { Prototype:&<Gem>.BGDrawer Image:&<Gem>.GraphicGlow.1 } ]
+					[2 { Prototype:&<Gem>.BGDrawer Image:&<Gem>.GraphicGlow.2 } ]
+					[3 { Prototype:&<Gem>.BGDrawer Image:&<Gem>.GraphicGlow.3 } ]
+					[4 { Prototype:&<Gem>.BGDrawer Image:&<Gem>.GraphicGlow.4 } ]
+				]
 			]
 
 			Drawer.Composite.Switch(
