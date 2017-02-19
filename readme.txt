@@ -3,12 +3,18 @@ Sterowanie
 1 gracz - joypad 1, WSAD VB
 2 gracz - joypad 2, strza³ki ,.
 
+joypady trzeba pod³¹czyæ przed w³¹czeniem gry.
+
+Runy:
+
 czerwona runa - atak, odejmuje 5 HP
 zielona runa - leczenie, leczy 3
 fioletowa - przeciwnikowi spadaj¹ kryszta³ki
 ¿ó³ta - spowolnienie kryszta³ków na 3 sekundy
 niebieska - zamra¿a kryszta³ki przeciwnika
 
+
+Ew zmiany:
 
 game/actions/actions.msl mo¿na edytowaæ ManaCost (ile kryszta³ków trzeba matchowaæ, ¿eby uruchomiæ efekt)
 
