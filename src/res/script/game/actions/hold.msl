@@ -4,6 +4,7 @@
 		Hold: Game.Action.Switchable()
 		{
 			Passive: false
+			Hidden: true 
 			Switch.On.Events:
 			[
 				Event.HoldGem()[]

@@ -162,8 +162,13 @@ bool Player::tryToUsePassive()
 	if (_passiveCooldownTimer.isSet())
 		return false;
 
-	_passiveCooldownTimer.Start(_passiveCooldown);
+	
 	return true;
+}
+
+void Player::usedPassive()
+{
+	_passiveCooldownTimer.Start(_passiveCooldown);
 }
 
 bool Player::HoldGem(const Gem::pointer& gem)
@@ -195,7 +200,7 @@ bool Player::HoldGem(const Gem::pointer& gem)
 	if (_heldGem)
 		_heldGem->_held = true;
 
-	//TODO ifdestroyed, stop holding
+	return true;
 }
 
 void Player::Update()

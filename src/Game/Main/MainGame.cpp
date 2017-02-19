@@ -49,8 +49,8 @@ MainGame::MainGame(int players) : DisplaySceneTimer(MX::Window::current().size()
         auto levelView = std::make_shared<LevelView>(player, player->level());
         bg->AddNamedWidget("Player1.Level", levelView);
 
-        auto actionsView = std::make_shared<ActionsView>(player);
-        //bg->AddNamedWidget("Player1.Actions", actionsView);
+        auto actionsView = std::make_shared<ActionsView>(player, false);
+        bg->AddNamedWidget("Player1.Actions", actionsView);
 		bg->AddNamedWidget("Player1.HP", createHPView(player, false));
     }
 
@@ -60,8 +60,8 @@ MainGame::MainGame(int players) : DisplaySceneTimer(MX::Window::current().size()
         auto levelView = std::make_shared<LevelView>(player, player->level());
         bg->AddNamedWidget("Player2.Level", levelView);
 
-        auto actionsView = std::make_shared<ActionsView>(player);
-        //bg->AddNamedWidget("Player2.Actions", actionsView);
+        auto actionsView = std::make_shared<ActionsView>(player, true);
+        bg->AddNamedWidget("Player2.Actions", actionsView);
 		bg->AddNamedWidget("Player2.HP", createHPView(player, true));
     }
 

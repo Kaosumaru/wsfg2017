@@ -5,14 +5,14 @@
 		PassiveCooldown: 1.8
 		HorizSelector: false
 
-		MinSpeed: 12
+		MinSpeed: 8
 		MaxSpeed: 0.5
-		GameDuration: 180
+		GameDuration: 60
 
 		Actions:
 		[
 			&Actions.Hold
-			Game.Action.Speed()[2.5]
+			Game.Action.Speed( Hidden:true )[2.5]
 			&Actions.Attack
 			&Actions.Heal
 			&Actions.GemRain

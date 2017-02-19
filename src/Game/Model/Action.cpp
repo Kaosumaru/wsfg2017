@@ -11,6 +11,7 @@ using namespace BH;
 
 Action::Action(const std::string& objectName) : MX::ScriptObjectString(objectName)
 {
+	load_property(_hidden, "Hidden");
     load_property(_passive, "Passive");
     load_property(_cooldown, "Cooldown");
     load_property(_manaCost, "ManaCost");
@@ -27,7 +28,11 @@ Action::Action(const std::string& objectName) : MX::ScriptObjectString(objectNam
 void Action::Update()
 {
 	if (_passive && Context<Player>::current().tryToUsePassive())
-		Do();
+	{
+		if (Do())
+			Context<Player>::current().usedPassive();
+	}
+		
 }
 
 bool Action::Do()

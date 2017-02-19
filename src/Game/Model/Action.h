@@ -108,6 +108,7 @@ namespace BH
         bool passive() { return _passive; }
 		bool blocksMovement() { return _blocksMovement; }
 		virtual float cooldownMultiplier() { return 1.0f; }
+		bool hidden() { return _hidden; }
     protected:
         virtual bool onDo()
         {
@@ -118,6 +119,7 @@ namespace BH
 			
 		}
 
+		bool _hidden = false;
 		bool _blocksMovement = false;
         bool _passive = false;
         glm::ivec2 _selectedGemPos = { -1,-1 };

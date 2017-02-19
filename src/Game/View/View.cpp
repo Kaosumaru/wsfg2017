@@ -124,11 +124,11 @@ protected:
 class ActionView : public MX::Widgets::ScriptLayouterWidget
 {
 public:
-    ActionView(const Player::pointer& player, const Action::pointer& action)
+    ActionView(const Player::pointer& player, const Action::pointer& action, bool flip)
     {
         _player = player;
         _action = action;
-        SetLayouter("Game.Action.Layouter");
+        SetLayouter(flip ? "Game.Action.Layouter.Flip" : "Game.Action.Layouter");
     }
 
     void Run() override
@@ -188,7 +188,7 @@ namespace BH
 	}
 }
 
-ActionsView::ActionsView(const Player::pointer& player)
+ActionsView::ActionsView(const Player::pointer& player, bool flip)
 {
     _player = player;
     SetLayouter("Game.Actions.Layouter");
@@ -196,13 +196,10 @@ ActionsView::ActionsView(const Player::pointer& player)
     bool first = true;
     for (auto& action : player->actions().list())
     {
-        if (first)
-        {
-            first = false;
-            continue;
-        }
+		if (action->hidden())
+			continue;
 
-        auto view = std::make_shared<ActionView>(_player, action);
+        auto view = std::make_shared<ActionView>(_player, action, flip);
         AddNamedWidget("Action", view);
     }
 }

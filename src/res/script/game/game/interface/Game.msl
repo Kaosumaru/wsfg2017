@@ -79,6 +79,12 @@
 				Layout( n:Player2.HP p:9 )
 			]
 
+			Destination( x1:0 x2:-1 y1:540 )
+			[
+				Layout( n:Player1.Actions p:7 )
+				Layout( n:Player2.Actions p:9 )
+			]
+
 			Table( x1:60 x2:-60 y2:-20 )
 			[
 				tr( h:20 )
@@ -95,12 +101,11 @@
 						td()[]
 						td( w:264 )
 						[
-							Layout( n:Player1.Actions p:1 )
+
 						]
 						td( w:20 )
 						td( w:522 )
 						[
-
 							Layout( n:Player1.Level p:9 )
 						]
 					]
@@ -115,7 +120,7 @@
 						td( w:20 )
 						td( w:264 )
 						[
-							Layout( n:Player2.Actions p:3 )
+
 						]
 						td()[]
 					]

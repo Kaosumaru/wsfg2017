@@ -1,23 +1,37 @@
 {
 	Game.Action:
 	{
-		Drawer: Drawer.Composite.Layouter( Size: [87,87] )
+		Graphic1: { Class: Image.Image, Path: interface/skill.png	}
+
+		Drawer: Drawer.Composite.Layouter( Size: [339,30] )
 		[
-			Drawer.Composite.Current()[]
-			Destination( y1:"=Widget.Property('Progress') * 64 " )
+			Clip( x2:"=Widget.Property('Progress') * 339 " )
 			[
-				Drawer.Color() { Color:[0 0 0 0.3] }
+				Drawer.Image()[ &Game.Action.Graphic1 ]
 			]
 
-			Shift( Margin:5 )
-			[
-				&Game.Level.Frame.Drawer
-			]
 		]
 
 
 		Layouter: Layouter.Drawer(
 			Drawer: &<Action>.Drawer
+			)
+		[
+
+		]
+
+		Drawer.Flip: Drawer.Composite.Layouter( Size: [339,30] )
+		[
+			Clip( x1:"=339 - Widget.Property('Progress') * 339 " )
+			[
+				Drawer.Image()[ &Game.Action.Graphic1 ]
+			]
+
+		]
+
+
+		Layouter.Flip: Layouter.Drawer(
+			Drawer: &<Action>.Drawer.Flip
 			)
 		[
 

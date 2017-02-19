@@ -60,6 +60,7 @@ namespace BH
 		MX::Signal<void(const PlayerEvent&)> onEvent;
 
 		bool tryToUsePassive();
+		void usedPassive();
     protected:
         int                 _number = 0;
         Stats               _stats;

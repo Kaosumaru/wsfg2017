@@ -13,7 +13,7 @@ namespace BH
     class ActionsView : public MX::Widgets::ScriptLayouterWidget, public MX::SignalTrackable
     {
     public:
-        ActionsView(const Player::pointer& player);
+        ActionsView(const Player::pointer& player, bool flip);
         Player::pointer _player;
     };
 
