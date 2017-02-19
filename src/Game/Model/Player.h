@@ -58,16 +58,22 @@ namespace BH
 		bool HoldGem(const Gem::pointer& gem);
 
 		MX::Signal<void(const PlayerEvent&)> onEvent;
+
+		bool tryToUsePassive();
     protected:
         int                 _number = 0;
         Stats               _stats;
         
+		float _passiveCooldown = 0.0f;
+
+		MX::EventHolder   _onSwapEvents;
 		Level::pointer _level;
         ActionList _actions;
         PlayerControlSchema _controlSchema;
 		MX::Time::SimpleTimer _timer;
 		MX::FunctorsQueue _queue;
 		Gem::pointer _heldGem;
+		MX::Time::ManualStopWatch   _passiveCooldownTimer;
     };
 }
 

@@ -69,12 +69,7 @@ namespace BH
         glm::ivec2 wantsDelta();
 
         virtual bool Do();
-        virtual void Update()
-        {
-            if (_passive)
-                Do();
-        }
-
+		virtual void Update();
         auto& cooldownTimer() { return _cooldownTimer; }
 
 

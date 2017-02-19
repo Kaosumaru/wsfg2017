@@ -5,7 +5,7 @@
 using namespace MX;
 using namespace BH;
 
-class PlayerView : public MX::Widgets::ScriptLayouterWidget
+class PlayerView : public MX::Widgets::ScriptLayouterWidget, public MX::SignalTrackable
 {
 public:
 	PlayerView(const Player::pointer& player, bool left)
@@ -15,6 +15,8 @@ public:
 		SetLayouter("Game.Player.View.Layouter");
 		Script::onParsed.static_connect([&]() { onReload(); });
 		onReload();
+
+		player->onEvent.connect([&](const PlayerEvent& e) { OnEvent(e); }, this);
 	}
 
 	void onReload()
@@ -24,7 +26,7 @@ public:
 		script.load_property(_position, "Position");
 		script.load_property(_scale, "Scale");
 
-		loadAnimation(script, "Idle");
+		loadAnimation(script, "Idle", true);
 
 		loadAnimation(script, "Shield");
 		loadAnimation(script, "Claws");
@@ -33,11 +35,11 @@ public:
 		loadAnimation(script, "Heal");
 	}
 
-	void loadAnimation(ScriptObjectString& script, const std::string& name)
+	void loadAnimation(ScriptObjectString& script, const std::string& name, bool loop = false)
 	{
 		std::shared_ptr<Graphic::SingleAnimation> animation;
 		script.load_property(animation, name);
-		auto anim = Graphic::Animation::Create(animation);
+		Graphic::Animation::pointer anim = loop ? Graphic::Animation::Create(animation) : std::make_shared<Graphic::AnimationSingleRun>(animation);
 		_animations[name] = anim;
 
 		if (!_idle)
@@ -47,15 +49,35 @@ public:
 		}
 	}
 
+	void OnEvent(const PlayerEvent& e)
+	{
+		auto anim = _animations[e.name];
+		if (!anim)
+			return;
+		_current = anim;
+		_current->Reset();
+		_current->Start();
+	}
+
 	auto currentAnimation()
 	{
-		return _current;
+		if (_current)
+		{
+			if (_current->running())
+				return _current;
+			_current = false;
+		}
+		return _idle;
 	}
 
 	void Run() override
 	{
 		if (currentAnimation())
 			currentAnimation()->AdvanceTime(Time::Timer::current().elapsed_seconds());
+
+		
+
+		MX::Widgets::ScriptLayouterWidget::Run();
 	}
 
 	void Draw(float x, float y) override

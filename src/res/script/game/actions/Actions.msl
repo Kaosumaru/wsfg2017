@@ -1,7 +1,7 @@
 {
 	Actions:
 	{
-		//czerwona runa R
+
 		Attack: Game.Action()
 		{
 			Cooldown: 0.5
@@ -20,9 +20,9 @@
 			[
 				Event.PlaySound()
 				[
-					Sound.Sample()[ "sounds/Explosion.ogg" ]
+					Sound.Sample()[ "sounds/attack.ogg" ]
 				]
-
+				Event.PlayerEvent()[Claws]
 				Event.DamageEnemy()[5]
 			]
 
@@ -32,7 +32,7 @@
 			]
 		}
 
-		//niebieska runa
+
 		Frostbolt: Game.Action.Frostbolt()
 		{
 			Cooldown: 0.5
@@ -50,6 +50,7 @@
 
 			Events:
 			[
+				Event.PlayerEvent()[Bear]
 				Event.PlaySound()
 				[
 					Sound.Sample()[ "sounds/Freeze.ogg" ]
@@ -66,7 +67,6 @@
 
 		}
 
-		//zielona runa
 		Heal: Game.Action()
 		{
 			Cooldown: 0.5
@@ -85,7 +85,12 @@
 
 			Events:
 			[
+				Event.PlayerEvent()[Heal]
 				Event.Heal()[3]
+				Event.PlaySound()
+				[
+					Sound.Sample()[ "sounds/Heal.ogg" ]
+				]
 			]
 
 			Gem.Events:
@@ -94,13 +99,21 @@
 			]
 		}
 
-		//
 		GemRain: Game.Action.GemRain()
 		{
 			Cooldown: 2
 			ManaCost: 4
 			ManaSource: 2
 			Passive: true
+
+			Events:
+			[
+				Event.PlayerEvent()[Mind]
+				Event.PlaySound()
+				[
+					Sound.Sample()[ "sounds/Bear.ogg" ]
+				]
+			]
 		}
 
 		SlowTime: Game.Action()
@@ -116,6 +129,12 @@
 				Event.CompositeDelay( Time:3 )
 				[
 					Event.ChangeTimeMultiplier()[0.5]
+				]
+				Event.PlayerEvent()[Shield]
+				
+				Event.PlaySound()
+				[
+					Sound.Sample()[ "sounds/Slow.ogg" ]
 				]
 			]
 		}

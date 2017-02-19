@@ -2,7 +2,7 @@
 	Game.Player:
 	{
 		Health: 25
-		Cooldown: 1.8
+		PassiveCooldown: 1.8
 		HorizSelector: false
 
 		MinSpeed: 12
@@ -18,6 +18,16 @@
 			&Actions.GemRain
 			&Actions.Frostbolt
 			&Actions.SlowTime
+		]
+
+		OnSwap.Events:
+		[
+/*
+			Event.PlaySound()
+			[
+				Sound.Sample( Gain:2 )[ "sounds/Swap.ogg" ]
+			]
+*/
 		]
 	}
 }

@@ -4,8 +4,6 @@
 #include "SDL_keycode.h"
 using namespace BH;
 
-
-
 void PlayerControlSchema::SetupForPlayer(int number)
 {
     using namespace MX::Game;
@@ -60,6 +58,9 @@ Player::Player(int number)
 		script.load_property(maxTime, "MaxSpeed");
 		script.load_property(game_time, "GameDuration");
 
+		script.load_property(_passiveCooldown, "PassiveCooldown");
+		//_passiveCooldown
+
 		_level = std::make_shared<Level>(minTime, maxTime, game_time);
 	}
 
@@ -94,6 +95,7 @@ Player::Player(int number)
 			if (isHoldingGem() && oldPosition != newPosition)
 			{
 				_level->SwapGems(oldPosition, newPosition);
+				_onSwapEvents.Do();
 			}
 		}
 			
@@ -115,6 +117,8 @@ Player::Player(int number)
 			_actions.Add(ActionCreator::createHorizSwap());
 		}
 #endif
+		script.load_property(_onSwapEvents, "OnSwap.Events");
+		
 
 		std::vector<Action::pointer> actions;
 		script.load_property(actions, "Actions");
@@ -148,6 +152,18 @@ Player::Player(int number)
     //Freezeball
     //Confuse
     //SlowTime - passive
+}
+
+bool Player::tryToUsePassive()
+{
+	if (_passiveCooldown == 0.0f)
+		return true;
+
+	if (_passiveCooldownTimer.isSet())
+		return false;
+
+	_passiveCooldownTimer.Start(_passiveCooldown);
+	return true;
 }
 
 bool Player::HoldGem(const Gem::pointer& gem)
@@ -203,6 +219,7 @@ void Player::Update()
         _level->selector()->Move(_controller->wantsDirection());
     _controller->Update();
     */
+	_passiveCooldownTimer.Tick();
     _level->Update();
 	_timer.Step();
 }

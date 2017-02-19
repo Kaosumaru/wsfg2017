@@ -24,6 +24,12 @@ Action::Action(const std::string& objectName) : MX::ScriptObjectString(objectNam
         SetManaSource(manaSource);
 }
 
+void Action::Update()
+{
+	if (_passive && Context<Player>::current().tryToUsePassive())
+		Do();
+}
+
 bool Action::Do()
 {
 	float multiplier = cooldownMultiplier();
