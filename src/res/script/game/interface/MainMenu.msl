@@ -1,80 +1,61 @@
 {
 	GUI.MainMenu:
 	{
-		ShaderDrawer: Drawer.Color.Shader()
-		{
-			Shader: Shader.Uniform.Timed()
-			{
-				VertexPath: Shaders/instanced.vertex
-				FragmentPath: Shaders/menu/star.fragment
-
-				Name: StarShader
-
-				Defines:
-				[
-				]
-
-				Debug: true
-				Debug.Uniforms:
-				[
-					GL.Uniform.Float( n:time_m v:1 step:0.01)
-				]
-			}
-
-			Uniforms:
-			[
-				GL.Uniform.Int( n:iChannel0 v:1 )
-				GL.Uniform.Int( n:iChannel1 v:2 )
-				GL.Uniform.Int( n:iChannel2 v:3 )
-			]
-
-			Samplers:
-			[
-				Image.Image( Path: "ShaderData/tex02.jpg", Mipmap: true, Wrap: true )
-				Image.Image( Path: "ShaderData/tex09.jpg", Mipmap: true, Wrap: true )
-				Image.Image( Path: "ShaderData/tex3.jpg", Mipmap: true, Wrap: true )
-			]
-		}
-
-		ShaderDrawer2: Drawer.Color.Shader()
-		{
-			Shader: Shader.Uniform.Timed()
-			{
-				VertexPath: Shaders/instanced.vertex
-				FragmentPath: Shaders/menu/menu.fragment
-
-				Name: BackShader
-
-				Defines:
-				[
-				]
-
-				Debug: true
-				Debug.Uniforms:
-				[
-					GL.Uniform.Float( n:time_m v:1 step:0.01)
-				]
-			}
-		}
 
 		Image.BG: { Class: Image.Image, Path: menu/bg.png	}
+
+		Image.Play1: { Class: Image.Image, Path: menu/play.png	}
+		Image.Play2: { Class: Image.Image, Path: menu/play2.png	}
+
+		Image.Credits1: { Class: Image.Image, Path: menu/cred.png	}
+		Image.Credits2: { Class: Image.Image, Path: menu/cred2.png	}
 
 		Drawer: Drawer.Composite.Layouter()
 		[
 			Drawer.Image() { Image: &<MainMenu>.Image.BG }
 		]
 
+		PlayButton: Drawer.Composite.Layouter( Size: [612,263] )
+		[
+			Drawer.Composite.ButtonState()
+			{
+				Default.Image: &<MainMenu>.Image.Play1
+				Normal.Image: &<MainMenu>.Image.Play1
+				Hover.Image: &<MainMenu>.Image.Play2
+				Pressed.Image: &<MainMenu>.Image.Play2
+			}
+		]
+
+		CreditsButton: Drawer.Composite.Layouter( Size: [383,176] )
+		[
+			Drawer.Composite.ButtonState()
+			{
+				Default.Image: &<MainMenu>.Image.Credits1
+				Normal.Image: &<MainMenu>.Image.Credits1
+				Hover.Image: &<MainMenu>.Image.Credits2
+				Pressed.Image: &<MainMenu>.Image.Credits2
+			}
+		]
 
 		Layouter: Layouter.Drawer(
 			Drawer: &<MainMenu>.Drawer
-			Drawers: [ [&GUI.Button.Drawer [Button.Game Button.Credits Button.Exit]] ]
+			Drawers:
+			[
+				[&<MainMenu>.PlayButton [Button.Game]]
+				[&<MainMenu>.CreditsButton [Button.Credits]]
+			]
 			)
 		[
-			Table( y2:-100 )
+			Destination( x1:150 y1:100 )
 			[
-				Layout( n:Button.Game p:1 )
-				Layout( n:Button.Credits p:2 )
-				Layout( n:Button.Exit p:3 )
+				Layout( n:Button.Game p:7 )
+			]
+
+
+			Destination( x1:150 y1:400 )
+			[
+
+				Layout( n:Button.Credits p:7 )
 			]
 		]
 

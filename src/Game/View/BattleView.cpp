@@ -25,6 +25,12 @@ public:
 		script.load_property(_scale, "Scale");
 
 		loadAnimation(script, "Idle");
+
+		loadAnimation(script, "Shield");
+		loadAnimation(script, "Claws");
+		loadAnimation(script, "Bear");
+		loadAnimation(script, "Mind");
+		loadAnimation(script, "Heal");
 	}
 
 	void loadAnimation(ScriptObjectString& script, const std::string& name)

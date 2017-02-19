@@ -1,20 +1,23 @@
 {
 	Game.Victory.Screen:
 	{
+		KO: Drawer.Image( Pos:8 ) [{ Class: Image.Image, Path: interface/ko.png	}]
 
-		Player1.Drawer: Drawer.Composite.Layouter( Size: [450,225] )
+		Player1.Drawer: Drawer.Composite.Layouter( Size: [592,1000] )
 		[
-			Drawer.Image() [ { Class: Image.Image, Path: interface/PlayerOneWon.png	} ]
+			&<Screen>.KO
+			Drawer.Image( Pos:2 ) [ { Class: Image.Image, Path: interface/PlayerOneWon.png	} ]
 		]
 
-		Player2.Drawer: Drawer.Composite.Layouter( Size: [450,225] )
+		Player2.Drawer: Drawer.Composite.Layouter( Size: [592,1000] )
 		[
-			Drawer.Color() [ { Class: Image.Image, Path: interface/PlayerTwoWon.png	} ]
+			&<Screen>.KO
+			Drawer.Color(Pos:2 ) [ { Class: Image.Image, Path: interface/PlayerTwoWon.png	} ]
 		]
 
-		Tie.Drawer: Drawer.Composite.Layouter( Size: [450,225] )
+		Tie.Drawer: Drawer.Composite.Layouter( Size: [592,1000] )
 		[
-			Drawer.Color() { Color:[1 1 1 1] }
+			&<Screen>.KO
 		]
 
 

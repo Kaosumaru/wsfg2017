@@ -3,14 +3,61 @@
 	{
 		Char0.Animations:
 		{
-			Position: [170 130]
+			Position: [170 170]
 			//centrum spodniczki
+			Scale: 0.6
+
 			Idle: Animation.AnimationFromFiles()
 			{
 				Frames_count: 2
 				Filename_template: "chars/1/idle%d.png"
 				Frame_duration: 0.5
-				Frame_pivot: [69 100]
+				Frame_pivot: [198 174]
+			}
+
+			Heal: Animation.AnimationFromFiles()
+			{
+				Frames_count: 16
+				Filename_template: "chars/1/heal/heal%02d_0-1.png"
+				Frame_duration: 0.1
+				Frames_offset: 3
+				Frame_pivot: [198 174]
+			}
+
+			Mind: Animation.AnimationFromFiles()
+			{
+				Frames_count: 10
+				Filename_template: "chars/1/mind/mind%02d_0-1.png"
+				Frame_duration: 0.1
+				Frames_offset: 3
+				Frame_pivot: [198 174]
+			}
+
+			Bear: Animation.AnimationFromFiles()
+			{
+				Frames_count: 14
+				Filename_template: "chars/1/niedzwiedz/niedzwiedz%02d_0-1.png"
+				Frame_duration: 0.1
+				Frames_offset: 3
+				Frame_pivot: [198 174]
+			}
+
+			Claws: Animation.AnimationFromFiles()
+			{
+				Frames_count: 17
+				Filename_template: "chars/1/pazury/pazury%02d_0-1.png"
+				Frame_duration: 0.1
+				Frames_offset: 3
+				Frame_pivot: [198 174]
+			}
+
+			Shield: Animation.AnimationFromFiles()
+			{
+				Frames_count: 12
+				Filename_template: "chars/1/tarcza/tarcza%02d_0-1.png"
+				Frame_duration: 0.1
+				Frames_offset: 3
+				Frame_pivot: [198 174]
 			}
 
 		}

@@ -71,8 +71,6 @@ public:
 
         addButton("Button.Game")->onClicked.connect([&]() { OnGame(2); }, this);
         addButton("Button.Credits")->onClicked.connect([&]() { OnCredits(); }, this);
-        addButton("Button.Exit")->onClicked.connect([&]() { OnExit(); }, this);
-
     }
 
     void OnGame(int players, bool animate = true)
@@ -108,7 +106,7 @@ GuiManager::GuiManager()
 
 	GameInitializer::Init();
 #ifndef MX_GAME_RELEASE
-//    menu->OnGame(2, false);
+    menu->OnGame(2, false);
 #endif
 }
 
